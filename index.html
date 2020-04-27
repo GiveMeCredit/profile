@@ -55,14 +55,14 @@
             $('#send').click(async function() {
                 sendSessionToDVO(); // This should happen automatically
                 const session = await solid.auth.currentSession();
-                let url = `/profile.html?webId=${session.webId}`;
+                let url = `profile.html?webId=${session.webId}`;
                 window.open(url, '_blank');
                 $('.linkToProfile').show();
                 $('.linkToProfile a').attr('href', url).text(url);
             });
             $('#viewProfile button').click(async function() {
                 const session = await solid.auth.currentSession();
-                let url = `/profile.html?webId=${session.webId}`;
+                let url = `profile.html?webId=${session.webId}`;
                 window.open(url, '_blank');
             });
             /**** This is for testing purposes ****/
