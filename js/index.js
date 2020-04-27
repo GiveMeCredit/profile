@@ -72,7 +72,7 @@ $(document).ready(function () {
 
     }
 
-    $(document).on('click touchstart', '#submit', function () {
+    $('#submit').on('click touchstart', function () {
         let provider = $("#provider").val();
         login(provider);
     });
@@ -82,7 +82,7 @@ $(document).ready(function () {
         let url = `profile.html?webId=${session.webId}`;
         window.open(url, '_blank');
     });
-    $('#viewProfile').click(async function () {
+    $('#viewProfile').on('click touchstart', async function () {
         const session = await solid.auth.currentSession();
         let url = `profile.html?webId=${session.webId}`;
         window.open(url, '_blank');
