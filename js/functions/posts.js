@@ -51,6 +51,9 @@ $('#addPostBtn').click(async function () {
     }, err => console.log(err));
 });
 
+
+/******* These functions are soon to be deleted *******/
+
 export async function displayPosts(webId) {
     let postsArray = await getPosts(webId);
     if (postsArray !== null) {
