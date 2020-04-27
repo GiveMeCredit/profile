@@ -72,7 +72,7 @@ $(document).ready(function () {
 
     }
 
-    $(document).on('click', '#submit', 'touchstart', function () {
+    $(document).on('click touchstart', '#submit', function () {
         let provider = $("#provider").val();
         login(provider);
     });
