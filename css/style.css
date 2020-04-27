@@ -376,6 +376,8 @@ a.home {
     background-image: none;
     border: 1px solid transparent;
     border-radius: 4px;
+    /* buttons are not working on mobile */
+    z-index: 99;
 }
 .add-friend {
     display: block;
@@ -383,7 +385,6 @@ a.home {
 }
 .btn {
     padding: 6px 12px;
-    z-index: 99;
 }
 .btn-small {
     padding: 4px 8px;
