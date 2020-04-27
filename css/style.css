@@ -461,7 +461,7 @@ a.home {
 .home-page-content ul li{
     /*border-bottom:1px solid #dedada;*/
     padding:8px;
-    margin:8px 0;
+    /*margin:8px 0;*/
 }
 
 .home-page-content ul li:nth-of-type(odd){
