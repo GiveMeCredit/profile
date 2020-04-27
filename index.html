@@ -63,12 +63,11 @@
             });
             $('#viewProfile button').click(async function() {
                 const session = await solid.auth.currentSession();
-                let url = window.location.host;
-                console.log(url);
-                let query = `profile.html?webId=${session.webId}`;
-                let linkToProfile = url + query;
+                //let url = window.location.host;
+                let url = `/profile.html?webId=${session.webId}`;
+                //let linkToProfile = url + query;
                 //alert(linkToProfile);
-                window.open(linkToProfile, '_blank');
+                window.open(url, '_blank');
                 //window.location.host = linkToProfile;
                 //$('.linkToProfile').show();
                 //$('.linkToProfile a').attr('href', query).text(linkToProfile);
