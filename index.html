@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<title>DVO Profile</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <!--<link rel="stylesheet" href="/css/reset.css">-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/trumbowyg.min.css">
+    <script src="/js/solid-auth-client.bundle.js"></script>
+    <script src="/js/solid-file-client.bundle.js"></script>
+    <script src="/js/rdflib.min.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
+    <style>
+        .page {
+            display: none;
+        }
+
+    </style>
+</head>
+<!--
+<div class="header">
+    <a target="_blank" href="https://solid.inrupt.com/get-a-solid-pod">LOGIN</a> | <a target="_blank" href="https://solid.inrupt.com/get-a-solid-pod">GET YOUR FREE POD &amp; WEBID</a> | <a target="_blank" href="http://localhost:8000/?webId=https://devolution.inrupt.net/profile/card#me">VIEW YOUR PAGE</a>
+</div>-->
+<div id="home" class="container">
+    <div class="body">
+        <div class="sidebar">
+            <div class="sidebar-header"><a href="/"><img class="logo" src="../images/logo.png" /></a></div>
+            <div class="sidebar-sub-header">Login</div>
+            <div>
+                <div class="home-page-login">
+                    <div>
+                        <select id="provider" class="form-control">
+                            <option value="https://inrupt.net">Inrupt</option>
+                            <option value="https://solid.community/">Solid</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button id="submit" class="btn btn-green"><i class="fa fa-sign-in"></i></button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="sidebar-header"><button class="btn btn-blue"><i class="fa fa-user"></i>&nbsp;&nbsp;VIEW PROFILE</button></div>
+            <!--
+            <div class="sidebar-sub-header">These buttons are for testing</div>
+            <div style="text-align: center">
+                <button id="send" class="btn btn-red">SEND TOKEN</button>
+                <button id="clear" class="btn btn-blue">CLEAR</button>
+                <button id="reload" class="btn btn-yellow">RELOAD</button>
+            </div>-->
+            <div class="sidebar-sub-header">Documentation</div>
+            <div class="sidebar-menu">
+                <ul id="details">
+                    <li><a class="active page-link" data-page="gettingStarted" href="">Getting Started</a></li>
+                    <li><a class="page-link" data-page="about" href="">About</a></li>
+                    <li><a class="page-link" data-page="videos" href="">Videos</a></li>
+                    <!--<li><a class="page-link" data-page="tutorials" href="">Tutorials</a></li>
+                    <li><a class="page-link" data-page="faq" href="">FAQ</a></li>
+                    <li><a class="page-link" data-page="other" href="">Other projects</a></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="home-page-content">
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-header"><img class="profile-photo" src="https://devolution.inrupt.net/profile/profilepic.jpg"></div>
+            <div class="sidebar-sub-header">Hi. My name is Glen!</div>
+            <div>
+                <div class="about-me">
+                    <p>I don't charge money for my services. However, If you find any of the services which I offer either userful or interesting, I would greatly appreciate a donation, to help me continue development.</p>
+                </div>
+            </div>
+            <div>
+                <button style="display: block; margin: auto;" class="btn btn-red">DONATE</button>
+            </div>
+            <div class="sidebar-sub-header">Donations received this month</div>
+            <div>
+                <div class="donations-received">
+                    <div>
+                        <button class="currency btn btn-yellow">$</button>
+                    </div>
+                    <div>
+                        <input class="amount form-control" placeholder="0">
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-sub-header">NOTE: This will not be updated in real-time</div>
+        </div>
+    </div>
+    <!-- <div class="footer">If you found this service useful, please consider making a <a href="">donation</a></div> -->
+</div>
+<script src="js/menu.js"></script>
