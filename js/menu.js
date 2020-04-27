@@ -1,6 +1,6 @@
-$(function () {
+$(document).ready(function () {
     $('.home-page-content').load(`html/gettingStarted.html`);
-});
+})
 
 $(document).on('click', '.page-link', function (event) {
     event.preventDefault();
