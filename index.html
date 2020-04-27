@@ -64,6 +64,7 @@
             $('#viewProfile button').click(async function() {
                 const session = await solid.auth.currentSession();
                 let url = window.location.host;
+                console.log(url);
                 let query = `profile.html?webId=${session.webId}`;
                 let linkToProfile = url + query;
                 //alert(linkToProfile);
