@@ -56,10 +56,21 @@
                 sendSessionToDVO(); // This should happen automatically
                 const session = await solid.auth.currentSession();
                 let url = window.location.host;
-                let query = `/?webId=${session.webId}`;
+                let query = `/profile.html?webId=${session.webId}`;
                 let linkToProfile = url + query;
                 $('.linkToProfile').show();
                 $('.linkToProfile a').attr('href', query).text(linkToProfile);
+            });
+            $('#viewProfile button').click(async function() {
+                const session = await solid.auth.currentSession();
+                let url = window.location.host;
+                let query = `/profile.html?webId=${session.webId}`;
+                let linkToProfile = url + query;
+                alert(linkToProfile);
+                window.open(linkToProfile, '_blank');
+                //window.location.host = linkToProfile;
+                //$('.linkToProfile').show();
+                //$('.linkToProfile a').attr('href', query).text(linkToProfile);
             });
             /**** This is for testing purposes ****/
             $('#clear').click(function() {
@@ -103,16 +114,15 @@
 
                 </div>
             </div>
-            <div class="sidebar-header">
+            <div id="viewProfile" class="sidebar-header">
                 <button class="btn btn-blue"><i class="fa fa-user"></i>&nbsp;&nbsp;VIEW PROFILE</button>
             </div>
-            <!--
             <div class="sidebar-sub-header">These buttons are for testing</div>
             <div style="text-align: center">
                 <button id="send" class="btn btn-red">SEND TOKEN</button>
                 <button id="clear" class="btn btn-blue">CLEAR</button>
                 <button id="reload" class="btn btn-yellow">RELOAD</button>
-            </div>-->
+            </div>
             <div class="sidebar-sub-header">Documentation</div>
             <div class="sidebar-menu">
                 <ul id="details">
