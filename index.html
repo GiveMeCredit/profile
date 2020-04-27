@@ -19,6 +19,64 @@
         }
 
     </style>
+    <script>
+        $(document).ready(function() {
+
+            let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+            let port = chrome.runtime.connect(laserExtensionId);
+
+            async function sendSessionToDVO() {
+                const session = await solid.auth.currentSession();
+                if (session && session.webId) {
+                    port.postMessage({
+                        type: "storeSolidSessionToken",
+                        sessionToken: session,
+                        profileUrl: window.location.host
+                    });
+                }
+            }
+
+            async function login(idp) {
+                const session = await solid.auth.currentSession();
+                if (!session) {
+                    await solid.auth.login(idp);
+
+                    sendSessionToDVO()
+                } else {
+                    alert(`Logged in as ${session.webId}`);
+                }
+
+            }
+
+            $('#submit').click(function() {
+                let provider = $("#provider").val();
+                login(provider);
+            });
+            $('#send').click(async function() {
+                sendSessionToDVO(); // This should happen automatically
+                const session = await solid.auth.currentSession();
+                let url = window.location.host;
+                let query = `/?webId=${session.webId}`;
+                let linkToProfile = url + query;
+                $('.linkToProfile').show();
+                $('.linkToProfile a').attr('href', query).text(linkToProfile);
+            });
+            /**** This is for testing purposes ****/
+            $('#clear').click(function() {
+                //solid.auth.logout();
+                //localStorage.clear();
+                localStorage.removeItem("solid-auth-client");
+                port.postMessage({
+                    type: "clearLocalStorage"
+                });
+            });
+            /**** reload page with access token *****/
+            $('#reload').click(function() {
+                window.location = window.location.pathname
+            });
+        })
+
+    </script>
 </head>
 <!--
 <div class="header">
@@ -27,7 +85,9 @@
 <div id="home" class="container">
     <div class="body">
         <div class="sidebar">
-            <div class="sidebar-header"><a href="/index.html"><img class="logo" src="images/logo.png" /></a></div>
+            <div class="sidebar-header">
+                <a href="/index.html"><img class="logo" src="images/logo.png" /></a>
+            </div>
             <div class="sidebar-sub-header">Login</div>
             <div>
                 <div class="home-page-login">
@@ -43,7 +103,9 @@
 
                 </div>
             </div>
-            <div class="sidebar-header"><button class="btn btn-blue"><i class="fa fa-user"></i>&nbsp;&nbsp;VIEW PROFILE</button></div>
+            <div class="sidebar-header">
+                <button class="btn btn-blue"><i class="fa fa-user"></i>&nbsp;&nbsp;VIEW PROFILE</button>
+            </div>
             <!--
             <div class="sidebar-sub-header">These buttons are for testing</div>
             <div style="text-align: center">
