@@ -79,7 +79,6 @@ p {
     -webkit-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     -moz-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
-    text-transform: capitalize;
 }
 .sidebar > div {
     padding: 15px 30px;
@@ -185,6 +184,7 @@ hr {
     text-align: center;
     font-size: 16px;
     color: #cecdcd;
+    text-transform: capitalize;
 }
 a.home {
     border-right: 1px solid #848484;
@@ -194,6 +194,7 @@ a.home {
 }
 .sidebar-sub-header {
     text-align: center;
+    text-transform: capitalize;
 }
 .profile-photo {
     width: 100px;
@@ -456,15 +457,14 @@ a.home {
     overflow-y: scroll;
 }
 .home-page-content ul {
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
-.home-page-content ul li{
+.home-page-content ul li {
     /*border-bottom:1px solid #dedada;*/
-    padding:8px;
+    padding: 8px;
     /*margin:8px 0;*/
 }
-
-.home-page-content ul li:nth-of-type(odd){
+.home-page-content ul li:nth-of-type(odd) {
     background: #eae8e8;
 }
 .home-page-content ul li::before {
@@ -522,15 +522,15 @@ a.home {
 .donations-received .currency {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    width:100%;
-    height:34px;
+    width: 100%;
+    height: 34px;
 }
 .donations-received .amount {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     color: #fff;
     text-align: center;
-    height:34px;
+    height: 34px;
 }
 .about-me {
     text-align: center;
