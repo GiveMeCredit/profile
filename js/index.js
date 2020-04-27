@@ -37,9 +37,9 @@ $(document).ready(function () {
         return hashParams;
     }
 
-    let hash = getHashParams();
-    console.log(hash);
-    if (Object.entries(hash).length > 0) {
+    let hashParams = getHashParams();
+    console.log(hashParams);
+    if (Object.entries(hashParams).length > 0) {
         $('#viewProfile span').text('VIEW PROFILE');
         $('#viewProfile').removeClass('btn-blue');
         $('#viewProfile').addClass('btn-red');

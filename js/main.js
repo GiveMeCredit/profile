@@ -76,11 +76,37 @@ $(document).ready(async function () {
         $('#posts').html("");
         showFriends(webIdFromUrl);
 
+        try {
+            let about = await fileClient.readFile(dvoFolder + "about.html");
+            $(".editable").html(`${await about}`);
+        } catch (e) {
+            $(".editable").html("This will be your extended note. When you log in, a file called about.html will uploaded to /public/DVO/. Additionally, two folders will be created: /DVO/posts and DVO/comments. You can edit this file from the font-end.");
+        }
+
+        try {
+            let folder = await fileClient.readFolder(dvoFolder + "posts");
+            let array = folder.files;
+            if (!array || !array.length) {
+                $("#posts").html(`${firstName} hasn't posted anything yet.`);
+            } else {
+                for (let i = 0; i < array.length; i++) {
+                    let label = array[i]['label'];
+                    let id = label.split('.');
+                    await $.get(array[i]['url'], '', function (data) {
+                        $("#posts").prepend(`<div class="post-icons"><i data-button-type='${id[0]}' class="delete fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
+                    });
+                }
+            }
+        } catch (e) {
+            $("#posts").html(`${firstName} hasn't posted anything yet.`);
+        }
+
         // CHECK IF DVO FOLDER EXISTS
         // CHECK THAT THE WEBID FROM THE QUERY STRING MATCHED THE LOGGED IN USERS WEBID
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
             $('.edit-icons').show();
+            $('.post-icons').show();
             $('#add-new-post').show();
             $("#addPost").attr("placeholder", `What's on your mind, ${firstName}?`);
             $('#addPost').trumbowyg({
