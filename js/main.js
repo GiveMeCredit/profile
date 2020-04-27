@@ -152,11 +152,6 @@ $(document).ready(async function () {
                 let about = await fileClient.readFile(dvoFolder + "about.html");
                 $(".editable").html(`${await about}`);
             }
-            try {
-                displayPosts(webIdFromUrl);
-            } catch (e) {
-                console.log("no posts");
-            }
         }
 
         $(".edit-content").click(async function () {
