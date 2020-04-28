@@ -19,7 +19,7 @@ $('#addFriend').click(async function () {
     friend = await getWebIdOrigin(friend);
     let isFriend = await checkFriends(me, friend);
     if (isFriend) {
-        await me.friends.delete(friendId).then(function(err){
+        await me.friends.delete(friendId).then(function (err) {
             console.log(err);
         });
     } else {
@@ -27,12 +27,9 @@ $('#addFriend').click(async function () {
     }
 });
 
-export async function addFriend(friend) {
-    
-}
 
 export async function removeFriend(friend) {
-    
+
 }
 
 export async function checkFriends(me, them) {
@@ -50,14 +47,19 @@ export async function checkFriends(me, them) {
 
 export async function showFriends(webId) {
     const subject = await solid.data[webId];
+    console.log(`${subject}`);
     let fullName = await subject.vcard$fn;
-    for await (let friend of subject.friends) {
-        //console.log(`  - ${await friend} is a friend of ${await fullName}`);
+    for await (const friend of subject.friends) {
+        console.log(`  - ${await friend} is a friend of ${await fullName}`);
         // need to make sure that all urls are consistent
-        let fr = `${await getWebIdOrigin(await friend)}/profile/card#me`;
-        let friendUrl = "?webId=" + fr;
-        let photo = await solid.data[fr].vcard$hasPhoto;
-        if (!photo) photo = 'images/profilepic.jpg';
-        $('.friends .photos').prepend(`<a alt="${fullName}" href='${friendUrl}'><img class="friend-photo-small active-friend-photo" src="${photo}" /></a>`);
+        try {
+            let fr = `${await getWebIdOrigin(await friend)}/profile/card#me`;
+            let friendUrl = "?webId=" + fr;
+            let photo = await solid.data[fr].vcard$hasPhoto;
+            if (!photo) photo = 'images/profilepic.jpg';
+            $('.friends .photos').prepend(`<a alt="${fullName}" href='${friendUrl}'><img class="friend-photo-small active-friend-photo" src="${photo}" /></a>`);
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

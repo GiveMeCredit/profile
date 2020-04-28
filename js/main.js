@@ -69,8 +69,12 @@ $(document).ready(async function () {
         if (phone) phone = phone.split('tel:')[1];
         let address = await getVcardAddress(webIdFromUrl);
         let role = await solid.data[webIdFromUrl].vcard$role;
+        let dob = await solid.data[webIdFromUrl].vcard$bday;
+        const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10);
+        let age = await getAge(dob);
 
         // DISPLAY VCARD DATA
+
         document.title = fullName;
         $('#name').html(`${fullName}`);
         $(".name").html(`${firstName}`);
@@ -78,12 +82,15 @@ $(document).ready(async function () {
         $('#webId').attr("href", webIdFromUrl);
         $(".profile-photo").attr("src", photo);
         if (note) $(".note").html(`${note}`);
+        if (age) {
+            $('#age').html(`${age}`);
+            $('#age').removeClass('editable-item');
+        }
         $('#email').html(email);
         $('#phone').html(phone);
         $('#region').html(address[0]);
         $('#country').html(address[1]);
         $('#posts').html("");
-        showFriends(webIdFromUrl);
 
         try {
             let about = await fileClient.readFile(dvoFolder + "about.html");
@@ -163,6 +170,8 @@ $(document).ready(async function () {
             }
         }
 
+        showFriends(webIdFromUrl);
+        
         $(".edit-content").click(async function () {
             if ($(this).hasClass('fa-edit')) {
                 $('.editable').trumbowyg({
@@ -215,6 +224,8 @@ $(document).ready(async function () {
                 await updateVcardRegion(session.webId, update);
             } else if (field === 'country') {
                 await updateVcardCountry(session.webId, update);
+            } else if (field === 'age') {
+                await solid.data[`${session.webId}`].vcard$bday.set(update);
             } else {
                 alert('Sorry, you need to login to update your profile');
             }
