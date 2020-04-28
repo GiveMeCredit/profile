@@ -96,7 +96,7 @@ $(document).ready(async function () {
             let about = await fileClient.readFile(dvoFolder + "about.html");
             $(".editable").html(`${await about}`);
         } catch (e) {
-            $(".editable").html("This will be your extended note. When you log in, a file called about.html will uploaded to /public/DVO/. Additionally, two folders will be created: /DVO/posts and DVO/comments. You can edit this file from the font-end.");
+            $(".editable").html("This will be your extended note. When you log in, a file called about.html will uploaded to /public/DVO/. You can edit this file from the font-end. Additionally, two folders will be created: /DVO/posts and DVO/comments.");
         }
 
         try {
