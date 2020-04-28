@@ -46,8 +46,12 @@ $(document).ready(function () {
         $('.login-status').html('You are logged in');
     }
 
-    let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-    let port = chrome.runtime.connect(laserExtensionId);
+    try {
+        let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+        let port = chrome.runtime.connect(laserExtensionId);
+    } catch (e) {
+        console.log(e);
+    }
 
     async function sendSessionToDVO() {
         const session = await solid.auth.currentSession();
@@ -64,7 +68,6 @@ $(document).ready(function () {
         const session = await solid.auth.currentSession();
         if (!session) {
             await solid.auth.login(idp);
-
             sendSessionToDVO()
         } else {
             alert(`Logged in as ${session.webId}`);
