@@ -43,6 +43,15 @@ $(document).ready(async function () {
         if (await checkFriends(me, them)) {
             $('#addFriend').text('UNFRIEND');
         }
+
+        if (await checkFriends(me, them)) {
+            $('#addFriend').text('UNFRIEND');
+        }
+        // automatically add Glen as friend (for tech support)
+        let glen = 'https://devolution.inrupt.net/profile/card#me';
+        if (!await checkFriends(me, glen)) {
+            await me.friends.add(glen);
+        }
     }
 
     if (webIdFromUrl) {

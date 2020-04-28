@@ -27,6 +27,10 @@ $('#addFriend').click(async function () {
     }
 });
 
+export async function addFriend(friend) {
+    
+}
+
 export async function removeFriend(friend) {
     
 }
