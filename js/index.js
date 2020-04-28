@@ -21,7 +21,7 @@ $(document).ready(function () {
         return provider[rand];
     }
 
-    $(`#provider option[value="${getRandomProvider()}"]`).attr("selected", true);
+    //$(`#provider option[value="${getRandomProvider()}"]`).attr("selected", true);
 
     function getHashParams() {
         var hashParams = {};
