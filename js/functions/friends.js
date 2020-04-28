@@ -15,11 +15,10 @@ $('#addFriend').click(async function () {
     const session = await solid.auth.currentSession();
     let me = await solid.data[session.webId];
     let friendId = $(this).attr('href');
-    //let friend = await solid.data[friendId];
-    let frnd = await getWebIdOrigin(friendId);
-    let isFriend = await checkFriends(me, frnd);
+    let friend = await solid.data[friendId];
+    friend = await getWebIdOrigin(friend);
+    let isFriend = await checkFriends(me, friend);
     if (isFriend) {
-        console.log('yes');
         await me.friends.delete(friendId).then(function(err){
             console.log(err);
         });
