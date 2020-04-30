@@ -98,6 +98,26 @@ $(document).ready(async function () {
         } catch (e) {
             $(".editable").html("This will be your extended note. When you log in, a file called about.html will uploaded to /public/DVO/. You can edit this file from the font-end. Additionally, two folders will be created: /DVO/posts and DVO/comments.");
         }
+        
+        /*let darcy = `${webIdOrigin}/public/darcy/post`;
+
+        try {
+            let folder = await fileClient.readFolder(darcy);
+            let array = folder.files;
+            if (!array || !array.length) {
+                $("#posts").html(`${firstName} hasn't posted anything yet.`);
+            } else {
+                for (let i = 0; i < array.length; i++) {
+                    let label = array[i]['label'];
+                    let id = label.split('.');
+                    await $.get(array[i]['url'], '', function (data) {
+                        $("#posts").prepend(`<div class="post-icons"><i data-button-type='${id[0]}' class="delete fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
+                    });
+                }
+            }
+        } catch (e) {
+            $("#posts").html(`${firstName} hasn't posted anything yet.`);
+        }*/
 
         try {
             let folder = await fileClient.readFolder(dvoFolder + "posts");
@@ -171,7 +191,7 @@ $(document).ready(async function () {
         }
 
         showFriends(webIdFromUrl);
-        
+
         $(".edit-content").click(async function () {
             if ($(this).hasClass('fa-edit')) {
                 $('.editable').trumbowyg({

@@ -46,14 +46,16 @@ $(document).ready(function () {
         $('.login-status').html('You are logged in');
     }
 
-    try {
+    /*try {
         let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
         let port = chrome.runtime.connect(laserExtensionId);
     } catch (e) {
         console.log(e);
-    }
+    }*/
 
     async function sendSessionToDVO() {
+        let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+        let port = chrome.runtime.connect(laserExtensionId);
         const session = await solid.auth.currentSession();
         if (session && session.webId) {
             port.postMessage({
@@ -81,9 +83,9 @@ $(document).ready(function () {
     });
     $('#send').click(async function () {
         sendSessionToDVO(); // This should happen automatically
-        const session = await solid.auth.currentSession();
+        /*const session = await solid.auth.currentSession();
         let url = `profile.html?webId=${session.webId}`;
-        window.open(url, '_blank');
+        window.open(url, '_blank');*/
     });
     $('#viewProfile').on('click touchstart', async function () {
         const session = await solid.auth.currentSession();
