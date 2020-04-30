@@ -47,7 +47,7 @@ $(document).ready(function () {
     }
 
     const laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-    const port;
+    let port;
 
     async function sendSessionToDVO() {
         port = chrome.runtime.connect(laserExtensionId);
