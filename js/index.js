@@ -46,16 +46,11 @@ $(document).ready(function () {
         $('.login-status').html('You are logged in');
     }
 
-    try {
-        let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-        let port = chrome.runtime.connect(laserExtensionId);
-    } catch (e) {
-        console.log(e);
-    }
+    const laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+    const port;
 
     async function sendSessionToDVO() {
-        /*let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-        let port = chrome.runtime.connect(laserExtensionId);*/
+        port = chrome.runtime.connect(laserExtensionId);
         const session = await solid.auth.currentSession();
         if (session && session.webId) {
             port.postMessage({
@@ -96,6 +91,7 @@ $(document).ready(function () {
     $('#clear').click(function () {
         //solid.auth.logout();
         //localStorage.clear();
+        port = chrome.runtime.connect(laserExtensionId);
         localStorage.removeItem("solid-auth-client");
         port.postMessage({
             type: "clearLocalStorage"
