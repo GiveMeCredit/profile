@@ -46,16 +46,16 @@ $(document).ready(function () {
         $('.login-status').html('You are logged in');
     }
 
-    /*try {
+    try {
         let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
         let port = chrome.runtime.connect(laserExtensionId);
     } catch (e) {
         console.log(e);
-    }*/
+    }
 
     async function sendSessionToDVO() {
-        let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-        let port = chrome.runtime.connect(laserExtensionId);
+        /*let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+        let port = chrome.runtime.connect(laserExtensionId);*/
         const session = await solid.auth.currentSession();
         if (session && session.webId) {
             port.postMessage({
