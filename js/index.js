@@ -53,16 +53,30 @@ $(document).ready(async function () {
 
     }*/
 
+    let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+    let port;
 
     const session = await solid.auth.currentSession();
     if (session) {
-        $('.login-status').html(`You are logged in - <a id="logout" href="">Logout</a>`);
+        let fullName = await solid.data[session.webId].vcard$fn;
+        let firstName = fullName.toString().split(' ');
+        $('.login-status').html(`Welcome ${firstName[0]}! <a id="logout" href="">Logout</a>`);
+        $('#viewProfile').css("display", "block");
         $('.home-page-login').hide();
-        $('#gun-password').show();
-    }
+        try {
+            port = chrome.runtime.connect(laserExtensionId);
+            port.postMessage({
+                type: "ping"
+            });
+            port.onMessage.addListener(function (res) {
+                if (res.type === "pong") $('#gun-password').show();
+            });
+        } catch (e) {
+            console.log(`There user doesn't have the DVO extension installed`);
+        }
 
-    let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-    let port;
+
+    }
 
     async function sendSessionToDVO() {
         const session = await solid.auth.currentSession();
@@ -71,10 +85,6 @@ $(document).ready(async function () {
             if (pw === "") {
                 alert(`You didn't enter anything. Please try again.`);
             } else {
-                let fullName = await solid.data[session.webId].vcard$fn;
-                let firstName = fullName.toString().split(' ');
-                $('.login-status').html(`Welcome ${firstName[0]}! <a id="logout" href="">Logout</a>`);
-                $('#viewProfile').css("display", "block");
                 port = chrome.runtime.connect(laserExtensionId);
                 port.postMessage({
                     type: "storeSolidSessionToken",
