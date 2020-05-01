@@ -69,7 +69,10 @@ $(document).ready(async function () {
                 type: "ping"
             });
             port.onMessage.addListener(function (res) {
-                if (res.type === "pong") $('#gun-password').show();
+                if (res.type === "pong") {
+                    $('#gun-password').show();
+                    //alert('All good! But you will need re-enter your password in order to login to the DVO extension');
+                }
             });
         } catch (e) {
             console.log(`There user doesn't have the DVO extension installed`);
