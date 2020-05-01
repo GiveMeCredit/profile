@@ -12,6 +12,7 @@
     <script src="js/vendor/solid-auth-client.bundle.js"></script>
     <script src="js/vendor/solid-file-client.bundle.js"></script>
     <script src="js/vendor/rdflib.min.js"></script>
+    <script src="https://solid.github.io/query-ldflex/dist/solid-query-ldflex.bundle.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <style>
         .page {
@@ -44,15 +45,14 @@
                     </div>
 
                 </div>
-            </div>
-            <div class="sidebar-header">
-                <button id="viewProfile" class="btn btn-blue"><i class="fa fa-user"></i><span style="margin-left:10px;">NOT LOGGED IN</span></button>
-            </div>
-            <div class="sidebar-sub-header">These buttons are for testing</div>
-            <div style="text-align: center">
-                <button id="send" class="btn btn-red">SEND TOKEN</button>
-                <button id="clear" class="btn btn-blue">CLEAR</button>
-                <button id="reload" class="btn btn-yellow">RELOAD</button>
+                <div id="gun-password" style="display: none; color:#fff; text-align: center;">
+                    <!--<p>Please re-enter your password to login to the toolbar</p>-->
+                    <div>
+                        <input type="text" id="input" class="form-control" placeholder="Re-enter your password">
+                    </div>
+                    <div><button id="send" class="btn btn-red"><i class="fa fa-sign-in"></i></button></div>
+                </div>
+                <button id="viewProfile" style="display: none; margin: 10px auto 0 auto;" class="btn btn-red"><i class="fa fa-user"></i><span style="margin-left:10px;">VIEW PROFILE</span></button>
             </div>
             <div class="sidebar-sub-header">Documentation</div>
             <div class="sidebar-menu">

@@ -9,7 +9,7 @@ $(document).on('click', '.page-link', function (event) {
     $('.home-page-content').load(`html/${name}.html`);
 });
 
-$(document).ready(function () {
+$(document).ready(async function () {
     $('.home-page-content').load(`html/gettingStarted.html`);
 
     function getRandomProvider() {
@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     //$(`#provider option[value="${getRandomProvider()}"]`).attr("selected", true);
 
-    function getHashParams() {
+    /*function getHashParams() {
         var hashParams = {};
         var e,
             a = /\+/g, // Regex for replacing addition symbol with a space
@@ -36,28 +36,55 @@ $(document).ready(function () {
             hashParams[d(e[1])] = d(e[2]);
         return hashParams;
     }
-
+    
     let hashParams = getHashParams();
     console.log(hashParams);
     if (Object.entries(hashParams).length > 0) {
         $('#viewProfile span').text('VIEW PROFILE');
         $('#viewProfile').removeClass('btn-blue');
         $('#viewProfile').addClass('btn-red');
-        $('.login-status').html('You are logged in');
+        try {
+            port = chrome.runtime.connect(laserExtensionId);
+            $('.home-page-login').hide();
+            $('#gun-password').show();
+        } catch (e) {
+            console.log(e);
+        }
+
+    }*/
+
+
+    const session = await solid.auth.currentSession();
+    if (session) {
+        $('.login-status').html(`You are logged in - <a id="logout" href="">Logout</a>`);
+        $('.home-page-login').hide();
+        $('#gun-password').show();
     }
 
-    const laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
+    let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
     let port;
 
     async function sendSessionToDVO() {
-        port = chrome.runtime.connect(laserExtensionId);
         const session = await solid.auth.currentSession();
         if (session && session.webId) {
-            port.postMessage({
-                type: "storeSolidSessionToken",
-                sessionToken: session,
-                profileUrl: window.location.host
-            });
+            let pw = $('#input').val();
+            if (pw === "") {
+                alert(`You didn't enter anything. Please try again.`);
+            } else {
+                let fullName = await solid.data[session.webId].vcard$fn;
+                let firstName = fullName.toString().split(' ');
+                $('.login-status').html(`Welcome ${firstName[0]}! <a id="logout" href="">Logout</a>`);
+                $('#viewProfile').css("display", "block");
+                port = chrome.runtime.connect(laserExtensionId);
+                port.postMessage({
+                    type: "storeSolidSessionToken",
+                    sessionToken: session,
+                    password: pw,
+                    profileUrl: window.location.host
+                });
+            }
+        } else {
+            alert(`You are not logged in. Please try again.`);
         }
     }
 
@@ -65,11 +92,9 @@ $(document).ready(function () {
         const session = await solid.auth.currentSession();
         if (!session) {
             await solid.auth.login(idp);
-            sendSessionToDVO()
         } else {
             alert(`Logged in as ${session.webId}`);
         }
-
     }
 
     $('#submit').on('click touchstart', function () {
@@ -77,28 +102,23 @@ $(document).ready(function () {
         login(provider);
     });
     $('#send').click(async function () {
-        sendSessionToDVO(); // This should happen automatically
-        /*const session = await solid.auth.currentSession();
-        let url = `profile.html?webId=${session.webId}`;
-        window.open(url, '_blank');*/
+        sendSessionToDVO();
     });
     $('#viewProfile').on('click touchstart', async function () {
         const session = await solid.auth.currentSession();
         let url = `profile.html?webId=${session.webId}`;
         window.open(url, '_blank');
     });
-    /**** This is for testing purposes ****/
-    $('#clear').click(function () {
+
+    $('#logout').click(function (e) {
         //solid.auth.logout();
         //localStorage.clear();
-        port = chrome.runtime.connect(laserExtensionId);
+        e.preventDefault();
         localStorage.removeItem("solid-auth-client");
+        port = chrome.runtime.connect(laserExtensionId);
         port.postMessage({
             type: "clearLocalStorage"
         });
-    });
-    /**** reload page with access token *****/
-    $('#reload').click(function () {
         window.location = window.location.pathname
     });
 })
