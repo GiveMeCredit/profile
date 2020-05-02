@@ -196,6 +196,12 @@ hr {
     color: #dd4b39;
     padding-left: 10px;
 }
+#name {
+    cursor: pointer;
+}
+.save-icon {
+    padding-left:10px;
+}
 #details .red-label {
     color: #dd4b39;
     float: left;

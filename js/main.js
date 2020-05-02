@@ -255,7 +255,8 @@ $(document).ready(async function () {
         $('.editable-item').click(function () {
             $(this).attr("contenteditable", 'true').focus();
             let field = $(this).attr('id');
-            $(this).parent().next('span').html(`<i class="edit-details fa fa-save" data-field="${field}"></i>`);
+            console.log(field);
+            $(this).next('span').html(`<i class="edit-details fa fa-save" data-field="${field}"></i>`);
         });
 
         $('.expand').click(function () {
