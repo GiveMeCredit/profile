@@ -79,6 +79,7 @@ p {
     -webkit-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     -moz-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
+    overflow-y: scroll;
 }
 .sidebar > div {
     padding: 15px 30px;
@@ -184,12 +185,34 @@ hr {
     color: #848484;
     cursor: pointer;
 }
+
 .sidebar li {
     border-bottom: 1px solid #222d32;
+    /*display: grid;
+    grid-template-columns: 50px auto auto;*/
 }
 .sidebar ul i {
     width: 15px;
     color: #dd4b39;
+    padding-left: 10px;
+}
+#details .red-label {
+    color: #dd4b39;
+    float: left;
+    width:50px;
+}
+.expand {
+   cursor: pointer;
+}
+.expand .fa-bars {
+    float: right;
+    color:#fff;
+}
+
+#additional-info .red-label {
+    color: #dd4b39;
+    float: left;
+    width:100px;
 }
 .sidebar-header {
     text-align: center;
@@ -518,7 +541,8 @@ a.home {
 #home .logo {
     width: 120px;
 }
-#submit, #send {
+#submit,
+#send {
     /*margin:auto;
     display: block;*/
     width: 100%;
@@ -532,7 +556,8 @@ a.home {
     border: 1px solid #161d20;
     /*border-radius: 4px;*/
 }
-#provider, #input {
+#provider,
+#input {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -550,7 +575,8 @@ a.home {
 #home .sidebar a:hover {
     color: #dd4b39;
 }
-.home-page-login, #gun-password {
+.home-page-login,
+#gun-password {
     display: grid;
     grid-template-columns: 3fr 1fr;
 }

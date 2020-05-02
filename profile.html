@@ -28,18 +28,44 @@
                 <a class="home" href="index.html"><i class="fa fa-home"></i> Home</a><a id="login" class="active" href="index.html"><i class="fa fa-sign-in"></i> <span class="status">Login</span></a></div>
             <div class="sidebar-header"><span id="name" class="editable-item">Guest User</span><span></span></div>
             <div><img class="profile-photo" src="images/profilepic.jpg" /></div>
-            <div class="sidebar-sub-header"></div>
-            <div>
-                <ul id="details">
-                    <li><i class="fa fa-id-badge"></i> <a id="webId" target="_blank" href="#">WebID</a></li>
-                    <li><i class="fa fa-hourglass"></i> <span><span id="age" class="editable-item">Enter DOB: YYYY-MM-DD</span></span><span></span></li>
-                    <li><i class="fa fa-at"></i> <span><span id="email" class="editable-item">No email</span></span><span></span></li>
-                    <li><i class="fa fa-phone"></i> <span><span id="phone" class="editable-item">No phone</span></span><span></span></li>
-                    <li><i class="fa fa-map-marker"></i> <span><span id="region" class="editable-item">No region</span><span>, </span><span id="country" class="editable-item">No country</span></span><span></span></li>
-                </ul>
-            </div>
+            <div id="role" class="sidebar-sub-header"></div>
             <div>
                 <button id="addFriend" class="add-friend btn btn-green">ADD FRIEND</button>
+            </div>
+            <div>
+                <ul id="details">
+                    <!--<li><i class="fa fa-id-badge"></i> <a id="webId" target="_blank" href="#">WebID</a></li>-->
+                    <li>
+                        <!--<i class="fa fa-hourglass"></i>-->
+                        <div class="red-label">Age:</div><span><span id="age" class="editable-item">Enter DOB: YYYY-MM-DD</span></span><span></span></li>
+                    <li>
+                        <!--<i class="fa fa-at"></i>-->
+                        <div class="red-label">Email:</div><span><span id="email" class="editable-item">No email</span></span><span></span></li>
+                    <li>
+                        <!--<i class="fa fa-phone"></i>-->
+                        <div class="red-label">Tel:</div><span><span id="phone" class="editable-item">No phone</span></span><span></span></li>
+                    <li>
+                        <!--<i class="fa fa-map-marker"></i>-->
+                        <div class="red-label">Addr:</div><span><span id="region" class="editable-item">No region</span><span>, </span><span id="country" class="editable-item">No country</span></span><span></span></li>
+                </ul>
+            </div>
+            <div class="sidebar-sub-header expand">Additional Info <i class="fa fa-bars"></i></div>
+            <div id="additional-info" style="display: none;">
+                <ul>
+                    <!--<li><i class="fa fa-id-badge"></i> <a id="webId" target="_blank" href="#">WebID</a></li>-->
+                    <li>
+                        <!--<i class="fa fa-hourglass"></i>-->
+                        <div class="red-label">Marital Status:</div><span><span id="marital" class="editable-item">Not specified</span></span><span></span></li>
+                    <li>
+                        <!--<i class="fa fa-at"></i>-->
+                        <div class="red-label">Height:</div><span><span id="email" class="editable-item">Not specified</span></span><span></span></li>
+                    <li>
+                        <!--<i class="fa fa-phone"></i>-->
+                        <div class="red-label">Weight:</div><span><span id="phone" class="editable-item">Not specified</span></span><span></span></li>
+                    <li>
+                        <!--<i class="fa fa-phone"></i>-->
+                        <div class="red-label">Eye Color:</div><span><span id="phone" class="editable-item">Not specified</span></span><span></span></li>
+                </ul>
             </div>
         </div>
         <div class="content">
@@ -89,5 +115,5 @@
             </div>
         </div>
     </div>
-   <!-- <div class="footer">If you found this service useful, please consider making a <a href="">donation</a></div>-->
+    <!-- <div class="footer">If you found this service useful, please consider making a <a href="">donation</a></div>-->
 </div>

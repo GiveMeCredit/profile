@@ -57,7 +57,7 @@ $(document).ready(async function () {
     if (webIdFromUrl) {
 
         // LOAD VCARD DATA  - js/functions/vcard.js
-        await fetcher.load(webIdFromUrl); // Do i still need this? 
+        //await fetcher.load(webIdFromUrl); // Do i still need this? 
         let photo = await solid.data[webIdFromUrl].vcard$hasPhoto;
         let note = await solid.data[webIdFromUrl].vcard$note;
         let fullName = await solid.data[webIdFromUrl].vcard$fn;
@@ -78,7 +78,7 @@ $(document).ready(async function () {
         document.title = fullName;
         $('#name').html(`${fullName}`);
         $(".name").html(`${firstName}`);
-        if (role) $('.sidebar-sub-header').html(`${role}`);
+        if (role) $('#role').html(`${role}`);
         $('#webId').attr("href", webIdFromUrl);
         $(".profile-photo").attr("src", photo);
         if (note) $(".note").html(`${note}`);
@@ -98,7 +98,7 @@ $(document).ready(async function () {
         } catch (e) {
             $(".editable").html("This will be your extended note. When you log in, a file called about.html will uploaded to /public/DVO/. You can edit this file from the font-end. Additionally, two folders will be created: /DVO/posts and DVO/comments.");
         }
-        
+
         /*let darcy = `${webIdOrigin}/public/darcy/post`;
 
         try {
@@ -256,6 +256,14 @@ $(document).ready(async function () {
             $(this).attr("contenteditable", 'true').focus();
             let field = $(this).attr('id');
             $(this).parent().next('span').html(`<i class="edit-details fa fa-save" data-field="${field}"></i>`);
+        });
+
+        $('.expand').click(function () {
+            $('#additional-info').toggle();
+            $(".sidebar").animate({
+                scrollTop: $(document).height()
+            }, "slow");
+            return false;
         });
     }
 });
