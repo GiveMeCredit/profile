@@ -190,8 +190,6 @@ $(document).ready(async function () {
             }
         }
 
-        showFriends(webIdFromUrl);
-
         $(".edit-content").click(async function () {
             if ($(this).hasClass('fa-edit')) {
                 $('.editable').trumbowyg({
@@ -266,5 +264,7 @@ $(document).ready(async function () {
             }, "slow");
             return false;
         });
+        
+        showFriends(webIdFromUrl);
     }
 });
