@@ -75,7 +75,7 @@ p {
 }
 .sidebar {
     background: #28343a;
-    color: #848484;
+    color: #c1c1c1;
     -webkit-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     -moz-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
@@ -182,7 +182,7 @@ hr {
     display: block;
     padding: 10px 0px;
     text-decoration: none;
-    color: #848484;
+    color: #c1c1c1;
     cursor: pointer;
 }
 
@@ -220,10 +220,15 @@ hr {
     float: left;
     width:100px;
 }
+#additional-info select {
+    background: #28343a;
+    color: #c1c1c1;
+    border: none;
+}
 .sidebar-header {
     text-align: center;
     font-size: 16px;
-    color: #cecdcd;
+    color: #c1c1c1;
     text-transform: capitalize;
 }
 a.home {
@@ -458,13 +463,9 @@ a.home {
 }
 
 /************************ INTRO *********************/
-
+/*
 #intro {
     text-align: center;
-    /*color: #fff;
-    max-width: 600px;
-    margin: auto;
-    width: 100%;*/
 }
 #intro .logo {
     width: 200px;
@@ -478,12 +479,6 @@ a.home {
 #intro .linkToProfile {
     font-size: 16px;
 }
-
-/*#intro #provider{
-    padding:30px;
-    width:400px;
-    text-align: center;
-}*/
 
 #intro h2 {
     font-family: 'OpenSans-Bold', Sans-Serif;
@@ -500,19 +495,17 @@ a.home {
 }
 #intro .choose div {
     border-radius: 5px;
-    /*border: 1px solid #4a575d;*/
     background: #28343a;
     -webkit-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     -moz-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     padding: 20px 0;
-    /*background: #fff;*/
 }
 #intro .choose img {
     width: auto;
     height: 60px;
 }
-
+*/
 /************* Index.html *************/
 
 .home-page-content {
