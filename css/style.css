@@ -79,6 +79,8 @@ p {
     -webkit-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     -moz-box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
     box-shadow: inset 0px 0px 34px 23px rgba(0, 0, 0, 0.51);
+}
+#profile .sidebar {
     overflow-y: scroll;
 }
 .sidebar > div {
@@ -185,7 +187,6 @@ hr {
     color: #c1c1c1;
     cursor: pointer;
 }
-
 .sidebar li {
     border-bottom: 1px solid #222d32;
     /*display: grid;
@@ -200,25 +201,24 @@ hr {
     cursor: pointer;
 }
 .save-icon {
-    padding-left:10px;
+    padding-left: 10px;
 }
 #details .red-label {
     color: #dd4b39;
     float: left;
-    width:50px;
+    width: 50px;
 }
 .expand {
-   cursor: pointer;
+    cursor: pointer;
 }
 .expand .fa-bars {
     float: right;
     font-size: 18px;
 }
-
 #additional-info .red-label {
     color: #dd4b39;
     float: left;
-    width:100px;
+    width: 100px;
 }
 #additional-info select {
     background: #28343a;
@@ -463,6 +463,8 @@ a.home {
 }
 
 /************************ INTRO *********************/
+
+
 /*
 #intro {
     text-align: center;
@@ -506,6 +508,8 @@ a.home {
     height: 60px;
 }
 */
+
+
 /************* Index.html *************/
 
 .home-page-content {
