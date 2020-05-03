@@ -72,10 +72,10 @@ $(document).ready(async function () {
         });
 
         // LOAD VCARD DATA
-
-        let photo = await solid.data[webIdFromUrl].vcard$hasPhoto;
-        let note = await solid.data[webIdFromUrl].vcard$note;
-        let fullName = await solid.data[webIdFromUrl].vcard$fn;
+        let user = await solid.data[webIdFromUrl];
+        let photo = await user.vcard$hasPhoto;
+        let note = await user.vcard$note;
+        let fullName = await user.vcard$fn;
         let firstName = fullName.toString().split(' ');
         firstName = firstName[0];
         let email = await getVcardEmail(webIdFromUrl);
@@ -83,10 +83,18 @@ $(document).ready(async function () {
         let phone = await getVcardPhone(webIdFromUrl);
         if (phone) phone = phone.split('tel:')[1];
         let address = await getVcardAddress(webIdFromUrl);
-        let role = await solid.data[webIdFromUrl].vcard$role;
-        let dob = await solid.data[webIdFromUrl].vcard$bday;
+        let role = await user.vcard$role;
+        let dob = await user.vcard$bday;
         const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10);
         let age = await getAge(dob);
+        let gender = await user.gender;
+        let profileType = await user.vcard$profileType;
+        let employmentStatus = await user.vcard$employmentStatus;
+        let maritalStatus = await user.vcard$maritalStatus;
+        let sexualOrientation = await user.vcard$sexualOrientation;
+        let ethnicity = await user.vcard$ethnicity;
+        let height = await user.vcard$height;
+        let weight = await user.vcard$weight;
 
         // DISPLAY VCARD DATA
 
@@ -105,6 +113,18 @@ $(document).ready(async function () {
         $('#phone').val(phone);
         $('#region').val(address[0]);
         $('#country').val(address[1]);
+        
+        // Additional info
+        
+        $(`#profile-type option[value="${profileType}"]`).prop("selected", true);
+        $(`#gender option[value="${gender}"]`).prop("selected", true);
+        $(`#employment-status option[value="${employmentStatus}"]`).prop("selected", true);
+        $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
+        $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
+        $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
+        $(`#height option[value="${height}"]`).prop("selected", true);
+        $(`#weight option[value="${weight}"]`).prop("selected", true);
+        
         $('#posts').html("");
 
         showFriends(webIdFromUrl);
@@ -372,12 +392,31 @@ $(document).ready(async function () {
             if (field === 'age') {
                 await user.vcard$bday.set(update);
             }
-            if (field == 'gender') {
+            if (field === 'gender') {
                 await user.foaf$gender.set(update);
             }
-            if (field == 'profile-type') {
-                await user.vcard$category.set(update);
+            if (field === 'profile-type') {
+                await user.vcard$profileType.set(update);
             }
+            if (field === 'employment-status') {
+                await user.vcard$employmentStatus.set(update);
+            }
+            if (field === 'marital-status') {
+                await user.vcard$maritalStatus.set(update);
+            }
+            if (field === 'sexual-orientation') {
+                await user.vcard$sexualOrientation.set(update);
+            }
+            if (field === 'ethnicity') {
+                await user.vcard$ethnicity.set(update);
+            }
+            if (field === 'height') {
+                await user.vcard$height.set(update);
+            }
+            if (field === 'weight') {
+                await user.vcard$weight.set(update);
+            }
+            
 
             alert(`${field} has been updated to ${update}`);
         }
