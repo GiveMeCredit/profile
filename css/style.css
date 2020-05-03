@@ -237,6 +237,7 @@ hr {
     text-transform: capitalize;
     background: transparent;
     border: none;
+    width:100%;
     font-family: 'OpenSans-Regular', Sans-Serif;
 }
 #name {
