@@ -113,18 +113,21 @@ $(document).ready(async function () {
         $('#phone').val(phone);
         $('#region').val(address[0]);
         $('#country').val(address[1]);
-        
+
         // Additional info
-        
+
         $(`#profile-type option[value="${profileType}"]`).prop("selected", true);
-        $(`#gender option[value="${gender}"]`).prop("selected", true);
-        $(`#employment-status option[value="${employmentStatus}"]`).prop("selected", true);
-        $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
-        $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
-        $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
-        $(`#height option[value="${height}"]`).prop("selected", true);
-        $(`#weight option[value="${weight}"]`).prop("selected", true);
-        
+
+        if (profileType === 'Personal') {
+            $(`#gender option[value="${gender}"]`).prop("selected", true);
+            $(`#employment-status option[value="${employmentStatus}"]`).prop("selected", true);
+            $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
+            $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
+            $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
+            $(`#height option[value="${height}"]`).prop("selected", true);
+            $(`#weight option[value="${weight}"]`).prop("selected", true);
+        }
+
         $('#posts').html("");
 
         showFriends(webIdFromUrl);
@@ -416,7 +419,7 @@ $(document).ready(async function () {
             if (field === 'weight') {
                 await user.vcard$weight.set(update);
             }
-            
+
 
             alert(`${field} has been updated to ${update}`);
         }
