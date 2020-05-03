@@ -1,3 +1,9 @@
+/***** TO DO ****/
+/*
+logout
+DOB
+*/
+
 const fileClient = SolidFileClient;
 
 $(document).ready(async function () {
@@ -65,8 +71,8 @@ $(document).ready(async function () {
             return false;
         });
 
-        // LOAD VCARD DATA  - js/functions/vcard.js
-        //await fetcher.load(webIdFromUrl); // Do i still need this? 
+        // LOAD VCARD DATA
+
         let photo = await solid.data[webIdFromUrl].vcard$hasPhoto;
         let note = await solid.data[webIdFromUrl].vcard$note;
         let fullName = await solid.data[webIdFromUrl].vcard$fn;
