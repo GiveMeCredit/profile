@@ -115,22 +115,25 @@ $(document).ready(async function () {
         $('#country').val(address[1]);
 
         // Additional info
-
-        $(`#profile-type option[value="${profileType}"]`).prop("selected", true);
-        let profType = `'${profileType}'`;
-        profType = profileType.toString();
-        if (profType === 'Personal') {
+        if (profileType) {
+            $(`#profile-type option[value="${profileType}"]`).prop("selected", true);
+            let profType = `'${profileType}'`;
+            profType = profileType.toString();
+            if (profType === 'Personal') {
+                $('#personal').css("display", "block");
+                $(`#gender option[value="${gender}"]`).prop("selected", true);
+                $(`#employment-status option[value="${employmentStatus}"]`).prop("selected", true);
+                $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
+                $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
+                $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
+                $(`#height option[value="${height}"]`).prop("selected", true);
+                $(`#weight option[value="${weight}"]`).prop("selected", true);
+            }
+            if (profType === 'Business') {
+                $('#business').css("display", "block");
+            }
+        } else {
             $('#personal').css("display", "block");
-            $(`#gender option[value="${gender}"]`).prop("selected", true);
-            $(`#employment-status option[value="${employmentStatus}"]`).prop("selected", true);
-            $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
-            $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
-            $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
-            $(`#height option[value="${height}"]`).prop("selected", true);
-            $(`#weight option[value="${weight}"]`).prop("selected", true);
-        }
-        if (profType === 'Business') {
-            $('#business').css("display", "block");
         }
 
         $('#posts').html("");
