@@ -226,12 +226,14 @@ $(document).ready(async function () {
             $('.editable').trumbowyg('destroy');
         });
 
-        $('.sidebar').on('click', '.edit-details', async function () { // edit-details should be called 'save'
+        $('.sidebar').on('click', '.fa-save', async function () {
             let field = $(this).attr("data-field");
             let update = $(`#${field}`).html();
 
             if (field === 'name') {
                 await solid.data[session.webId].vcard$name.set(update);
+            } else if (field === 'role') {
+                await solid.data[session.webId].vcard$role.set(update);
             } else if (field === 'email') {
                 update = "mailto:" + update;
                 await updateVcardEmail(session.webId, update);
@@ -247,14 +249,19 @@ $(document).ready(async function () {
             } else {
                 alert('Sorry, you need to login to update your profile');
             }
-            $(this).fadeOut('slow');
+            $('.edit-details').fadeOut('slow');
+        });
+
+        $('.sidebar').on('click', '.fa-close', async function () {
+            $(this).parent().attr("contenteditable", 'false');
+            $('.edit-details').fadeOut('slow');
         });
 
         $('.editable-item').click(function () {
             $(this).attr("contenteditable", 'true').focus();
             let field = $(this).attr('id');
             console.log(field);
-            $(this).next('span').html(`<i class="edit-details fa fa-save" data-field="${field}"></i>`);
+            $(this).next('span').html(`<span class="edit-details"><i class="fa fa-save" data-field="${field}"></i><i class="fa fa-close" data-field="${field}"></i></span>`);
         });
 
         $('.expand').click(function () {
@@ -264,7 +271,7 @@ $(document).ready(async function () {
             }, "slow");
             return false;
         });
-        
+
         showFriends(webIdFromUrl);
     }
 });

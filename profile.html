@@ -26,15 +26,19 @@
         <div class="sidebar">
             <div class="sidebar-top">
                 <a class="home" href="index.html"><i class="fa fa-home"></i> Home</a><a id="login" class="active" href="index.html"><i class="fa fa-sign-in"></i> <span class="status">Login</span></a></div>
-            <div class="sidebar-header"><span id="name" class="editable-item">Guest User</span><span class="save-icon"></span></div>
+            <div class="sidebar-header"><span id="name" class="editable-item">Guest User</span><span></span></div>
             <div><img class="profile-photo" src="images/profilepic.jpg" /></div>
-            <div id="role" class="sidebar-sub-header"></div>
+            <div class="sidebar-sub-header"><span id="role" class="editable-item"></span><span></span></div>
             <div>
                 <button id="addFriend" class="add-friend btn btn-green">ADD FRIEND</button>
             </div>
             <div>
+                <div class="edit-icons" style="display: none"><i class="fa fa-close"></i><i class="fa fa-edit"></i></div>
                 <ul id="details">
                     <!--<li><i class="fa fa-id-badge"></i> <a id="webId" target="_blank" href="#">WebID</a></li>-->
+                    <!--<i class="fa fa-hourglass"></i>-->
+                    <li>
+                        <div class="red-label">Age:</div><span id="age" class="editable-item">Enter DOB: YYYY-MM-DD</span><span></span></li>
                     <li>
                         <!--<i class="fa fa-at"></i>-->
                         <div class="red-label">Email:</div><span id="email" class="editable-item">No email</span><span></span></li>
@@ -48,7 +52,9 @@
             </div>
             <div class="sidebar-sub-header expand">Additional Info <i class="fa fa-bars"></i></div>
             <div id="additional-info" style="display: none;">
-                <p style="max-width:250px; text-align: center">Under construction. The options will change depending on the profile type.</p>
+                <p style="text-align: center">This section is under construction.
+                    <br/>The options will change depending on the profile type.</p>
+                <div class="edit-icons" style="display: none"><i class="fa fa-close"></i><i class="fa fa-edit"></i></div>
                 <ul>
                     <li>
                         <div class="red-label">Profile Type:</div><span id="profile-type">                        
@@ -58,9 +64,6 @@
                             <option value="public-service">Public Service</option>
                             <option value="charity">Charity</option>
                         </select></span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-hourglass"></i>-->
-                        <div class="red-label">Age:</div><span id="age" class="editable-item">Enter DOB: YYYY-MM-DD</span><span></span></li>
                     <li>
                         <div class="red-label">Emp. Status:</div><span id="employment-status">                        
                         <select>
@@ -91,11 +94,20 @@
                         </select></span><span></span></li>
                     <li>
                         <!--<i class="fa fa-at"></i>-->
-                        <div class="red-label">Height:</div><span><span id="email" class="editable-item">Not specified</span></span><span></span></li>
+                        <div class="red-label">Height:</div><span><span id="height"><select>
+                            <option value="">120 cm</option>
+                            <option value="">121 cm</option>
+                            <option value="">122 cm</option>
+                        </select></span></span><span></span></li>
                     <li>
                         <!--<i class="fa fa-phone"></i>-->
-                        <div class="red-label">Weight:</div><span><span id="phone" class="editable-item">Not specified</span></span><span></span></li>
+                        <div class="red-label">Weight:</div><span><span id="weight"><select>
+                            <option value="">40 kg</option>
+                            <option value="">41 kg</option>
+                            <option value="">42 kg</option>
+                        </select></span></span><span></span></li>
                 </ul>
+                <button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>
             </div>
         </div>
         <div class="content">
