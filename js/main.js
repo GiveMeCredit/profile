@@ -425,7 +425,6 @@ $(document).ready(async function () {
                 await user.vcard$weight.set(update);
             }
 
-
             alert(`${field} has been updated to ${update}`);
         }
 
