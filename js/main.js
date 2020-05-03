@@ -230,7 +230,6 @@ $(document).ready(async function () {
             });
         }
 
-
         async function displayPosts() {
             try {
                 let folder = await fileClient.readFolder(dvoFolder + "posts");
@@ -434,6 +433,5 @@ $(document).ready(async function () {
                 resolve(array);
             });
         }
-
     }
 });

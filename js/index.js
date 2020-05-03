@@ -77,8 +77,6 @@ $(document).ready(async function () {
         } catch (e) {
             console.log(`There user doesn't have the DVO extension installed`);
         }
-
-
     }
 
     async function sendSessionToDVO() {
