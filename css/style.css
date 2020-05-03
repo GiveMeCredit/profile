@@ -195,8 +195,9 @@ hr {
 .row div:first-child {
     color: #dd4b39;
 }
+
 .sidebar .fa-save {
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     display: none;
 }
 .expand {
