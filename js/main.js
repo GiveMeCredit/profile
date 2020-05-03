@@ -1,34 +1,19 @@
-import {
-    FOAF, VCARD, store, fetcher, updater, fileClient
-}
-from './functions/namespaces.js'; // can probably remove some of these as i'm using ldflex now
-import {
-    showFriends, checkFriends
-}
-from './functions/friends.js';
-import {
-    displayPosts
-}
-from './functions/posts.js';
-import {
-    getWebId, getWebIdOrigin, getWebIdFromUrl
-}
-from './functions/webId.js';
-import {
-    getVcardEmail, getVcardPhone, getVcardAddress, updateVcardEmail, updateVcardPhone, updateVcardRegion, updateVcardCountry
-}
-from './functions/vcard.js';
-import {
-    getAboutPage, updateAboutPage, createAboutPage
-}
-from './functions/fileManager.js';
-import {
-    createFolders
-}
-from './functions/createFolders.js';
+const fileClient = SolidFileClient;
 
 $(document).ready(async function () {
     const session = await solid.auth.currentSession();
+
+    function getWebIdFromUrl() {
+        let urlParams = new URLSearchParams(window.location.search);
+        let webIdFromUrl = urlParams.get('webId');
+        return webIdFromUrl;
+    }
+
+    function getWebIdOrigin(webId) {
+        let a = document.createElement("a");
+        a.href = webId;
+        return a.origin;
+    }
 
     // CHECK QUERY STRING FOR WEBID
     let webIdFromUrl = getWebIdFromUrl(); // e.g. https://devolution.inrupt.net/profile/card
@@ -54,7 +39,22 @@ $(document).ready(async function () {
         }
     }
 
+    async function checkFriends(me, them) {
+        return new Promise(async resolve => {
+            for await (const friend of me.friends) {
+                let isFriend = await getWebIdOrigin(friend); // remove /profile/card#me to ensure consistency
+                if (them === isFriend) {
+                    //console.log(`  - ${me} is a friend of ${isFriend}`);
+                    resolve(true);
+                }
+            }
+            resolve(false);
+        });
+    }
+
     if (webIdFromUrl) {
+
+        $('#addFriend').attr("href", webIdFromUrl);
 
         // LOAD VCARD DATA  - js/functions/vcard.js
         //await fetcher.load(webIdFromUrl); // Do i still need this? 
@@ -92,6 +92,25 @@ $(document).ready(async function () {
         $('#country').html(address[1]);
         $('#posts').html("");
 
+        showFriends(webIdFromUrl);
+        async function showFriends(webId) {
+            const subject = await solid.data[webId];
+            for await (const friend of subject.friends) {
+                console.log(`  - ${await friend} is a friend of ${await fullName}`);
+                // need to make sure that all urls are consistent
+                try {
+                    let fr = `${await getWebIdOrigin(await friend)}/profile/card#me`;
+                    let friendUrl = "?webId=" + fr;
+                    let friendPhoto = await solid.data[fr].vcard$hasPhoto;
+                    if (!friendPhoto) friendPhoto = 'images/profilepic.jpg';
+                    let friendName = await solid.data[friend].vcard$fn;
+                    $('.friends .photos').prepend(`<a alt="${friendName}" href='${friendUrl}'><img class="friend-photo-small active-friend-photo" src="${friendPhoto}" /></a>`);
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        }
+
         try {
             let about = await fileClient.readFile(dvoFolder + "about.html");
             $(".editable").html(`${await about}`);
@@ -99,43 +118,7 @@ $(document).ready(async function () {
             $(".editable").html("This will be your extended note. When you log in, a file called about.html will uploaded to /public/DVO/. You can edit this file from the font-end. Additionally, two folders will be created: /DVO/posts and DVO/comments.");
         }
 
-        /*let darcy = `${webIdOrigin}/public/darcy/post`;
-
-        try {
-            let folder = await fileClient.readFolder(darcy);
-            let array = folder.files;
-            if (!array || !array.length) {
-                $("#posts").html(`${firstName} hasn't posted anything yet.`);
-            } else {
-                for (let i = 0; i < array.length; i++) {
-                    let label = array[i]['label'];
-                    let id = label.split('.');
-                    await $.get(array[i]['url'], '', function (data) {
-                        $("#posts").prepend(`<div class="post-icons"><i data-button-type='${id[0]}' class="delete fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
-                    });
-                }
-            }
-        } catch (e) {
-            $("#posts").html(`${firstName} hasn't posted anything yet.`);
-        }*/
-
-        try {
-            let folder = await fileClient.readFolder(dvoFolder + "posts");
-            let array = folder.files;
-            if (!array || !array.length) {
-                $("#posts").html(`${firstName} hasn't posted anything yet.`);
-            } else {
-                for (let i = 0; i < array.length; i++) {
-                    let label = array[i]['label'];
-                    let id = label.split('.');
-                    await $.get(array[i]['url'], '', function (data) {
-                        $("#posts").prepend(`<div class="post-icons"><i data-button-type='${id[0]}' class="delete fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
-                    });
-                }
-            }
-        } catch (e) {
-            $("#posts").html(`${firstName} hasn't posted anything yet.`);
-        }
+        displayPosts();
 
         // CHECK IF DVO FOLDER EXISTS
         // CHECK THAT THE WEBID FROM THE QUERY STRING MATCHED THE LOGGED IN USERS WEBID
@@ -149,8 +132,6 @@ $(document).ready(async function () {
                 semantic: false,
                 resetCss: true
             });
-
-            // Need to remove createFolders.js, as i no longer need it
 
             try {
                 await fileClient.readFolder(dvoFolder);
@@ -188,48 +169,183 @@ $(document).ready(async function () {
                 let about = await fileClient.readFile(dvoFolder + "about.html");
                 $(".editable").html(`${await about}`);
             }
+
+            // Event Handlers
+            $(".edit-content").click(function () {
+                let $this = $(this);
+                editContent($this);
+            });
+            $(".close-content").click(function () {
+                $('.editable').trumbowyg('destroy');
+            });
+            $(".edit-note").click(function () {
+                let $this = $(this);
+                editNote($this);
+            });
+            $(".close-note").click(function () {
+                $('.editable').trumbowyg('destroy');
+            });
+            $('.sidebar').on('click', '.fa-save', function () {
+                let $this = $(this);
+                editItem($this);
+            });
+            $('.sidebar').on('click', '.fa-close', async function () {
+                $(this).parent().attr("contenteditable", 'false');
+                $('.edit-details').fadeOut('slow');
+            });
+
+            $('.editable-item').click(function () {
+                $(this).attr("contenteditable", 'true').focus();
+                let field = $(this).attr('id');
+                console.log(field);
+                $(this).next('span').html(`<span class="edit-details"><i class="fa fa-save" data-field="${field}"></i><i class="fa fa-close" data-field="${field}"></i></span>`);
+            });
+
+            $('.expand').click(function () {
+                $('#additional-info').toggle();
+                $(".sidebar").animate({
+                    scrollTop: $(document).height()
+                }, "slow");
+                return false;
+            });
+            $('#addFriend').click(function () {
+                let $this = $(this);
+                addFriend($this);
+            });
+            $('#addPostBtn').click(async function () {
+                addPost();
+            });
+            $('.content').on('click', '.edit-post', function () {
+                let $this = $(this);
+                editPost($this);
+            });
+            $('.content').on('click', '.save-post', function () {
+                let $this = $(this);
+                savePost($this);
+            });
+            $('.content').on('click', '.delete-post', function () {
+                let $this = $(this);
+                deletePost($this);
+            });
         }
 
-        $(".edit-content").click(async function () {
-            if ($(this).hasClass('fa-edit')) {
+
+        async function displayPosts() {
+            try {
+                let folder = await fileClient.readFolder(dvoFolder + "posts");
+                let array = folder.files;
+                if (!array || !array.length) {
+                    $("#posts").html(`${firstName} hasn't posted anything yet.`);
+                } else {
+                    for (let i = 0; i < array.length; i++) {
+                        let label = array[i]['label'];
+                        let id = label.split('.');
+                        await $.get(array[i]['url'], '', function (data) {
+                            $("#posts").prepend(`<div class="edit-icons"><i data-button-type='${id[0]}' class="delete-post fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
+                        });
+                    }
+                }
+            } catch (e) {
+                $("#posts").html(`${firstName} hasn't posted anything yet.`);
+            }
+        }
+
+        async function editPost($this) {
+            let id = $this.attr('data-button-type');
+            $('.' + id).trumbowyg({
+                semantic: false
+            });
+            $this.removeClass('edit-post');
+            $this.removeClass('fa-edit');
+            $this.addClass('save-post');
+            $this.addClass('fa-save');
+        }
+
+        async function savePost($this) {
+            let id = $this.attr('data-button-type');
+            $('.' + id).trumbowyg('destroy');
+            $this.removeClass('save-post');
+            $this.removeClass('fa-save');
+            $this.addClass('edit-post');
+            $this.addClass('fa-edit');
+            let url = `${webIdOrigin}/public/DVO/posts/${id}.html`;
+            let update = $('.' + id).html();
+            fileClient.updateFile(url, update, 'text/html').then(success => {
+                console.log(`Updated ${url}.`)
+            }, err => console.log(err));
+        }
+
+        async function deletePost($this) {
+            let id = $this.attr('data-button-type');
+            let url = `${webIdOrigin}/public/DVO/posts/${id}.html`;
+            fileClient.deleteFile(url).then(success => {
+                console.log(`Deleted ${url}.`);
+                $('.' + id).remove();
+                $this.parent().remove();
+            }, err => console.log(err));
+        }
+
+        async function addPost() {
+            let newNote = $("#addPost").val();
+            // need to add a title field and prepend to file name
+            let url = `${webIdOrigin}/public/DVO/posts/${new Date().getTime()}.html`;
+            fileClient.createFile(url).then(fileCreated => {
+                console.log(`Created file ${fileCreated}.`);
+                fileClient.updateFile(fileCreated, newNote, 'text/html').then(success => {
+                    console.log(`Updated ${url}.`);
+                    $("#posts").html("");
+                    displayPosts();
+                }, err => console.log(err));
+            }, err => console.log(err));
+        }
+
+        async function addFriend($this) {
+            let me = await solid.data[session.webId];
+            let friendId = $this.attr('href');
+            let friend = await solid.data[friendId];
+            friend = await getWebIdOrigin(friend);
+            let isFriend = await checkFriends(me, friend);
+            if (isFriend) {
+                await me.friends.delete(friendId);
+            } else {
+                await me.friends.add(friend);
+            }
+        }
+
+        async function editContent($this) {
+            if ($this.hasClass('fa-edit')) {
                 $('.editable').trumbowyg({
                     semantic: false
                 });
-            } else if ($(this).hasClass('fa-save')) {
+            } else if ($this.hasClass('fa-save')) {
                 $('.editable').trumbowyg('destroy');
-                // would be better to have all edit function in one event but trumbowyg doesn't like $(this)
+                // would be better to have all edit functions in one event but trumbowyg doesn't like $(this)
                 let update = $('.editable').html();
-                await updateAboutPage(dvoFolder, update);
+                let url = dvoFolder + "about.html";
+                fileClient.updateFile(url, update, 'text/html').then(success => {
+                    console.log(`Updated ${url}.`)
+                }, err => console.log(err));
             }
-            $(this).toggleClass("fa-edit fa-save");
-        });
+            $this.toggleClass("fa-edit fa-save");
+        }
 
-        $(".close-content").click(function () {
-            $('.editable').trumbowyg('destroy');
-        });
-
-        $(".edit-note").click(async function () {
-            if ($(this).hasClass('fa-edit')) {
+        async function editNote($this) {
+            if ($this.hasClass('fa-edit')) {
                 $('.note').trumbowyg({
                     semantic: false
                 });
-            } else if ($(this).hasClass('fa-save')) {
+            } else if ($this.hasClass('fa-save')) {
                 $('.note').trumbowyg('destroy');
                 // would be better to have all edit functions in one event but trumbowyg doesn't like $(this)
                 let update = $('.note').html();
                 await solid.data[session.webId].vcard$note.set(update);
             }
-            $(this).toggleClass("fa-edit fa-save");
-        });
+            $this.toggleClass("fa-edit fa-save");
+        }
 
-        $(".close-note").click(function () {
-            $('.editable').trumbowyg('destroy');
-        });
-
-        $('.sidebar').on('click', '.fa-save', async function () {
-            let field = $(this).attr("data-field");
+        async function editItem($this) {
+            let field = $this.attr("data-field");
             let update = $(`#${field}`).html();
-
             if (field === 'name') {
                 await solid.data[session.webId].vcard$name.set(update);
             } else if (field === 'role') {
@@ -250,28 +366,68 @@ $(document).ready(async function () {
                 alert('Sorry, you need to login to update your profile');
             }
             $('.edit-details').fadeOut('slow');
-        });
+        }
 
-        $('.sidebar').on('click', '.fa-close', async function () {
-            $(this).parent().attr("contenteditable", 'false');
-            $('.edit-details').fadeOut('slow');
-        });
+        async function updateVcardEmail(webId, update) {
+            for await (const emailId of solid.data[webId].vcard$hasEmail) {
+                await solid.data[`${emailId }`].vcard$value.set(update);
+            }
+        }
 
-        $('.editable-item').click(function () {
-            $(this).attr("contenteditable", 'true').focus();
-            let field = $(this).attr('id');
-            console.log(field);
-            $(this).next('span').html(`<span class="edit-details"><i class="fa fa-save" data-field="${field}"></i><i class="fa fa-close" data-field="${field}"></i></span>`);
-        });
+        async function getVcardEmail(webIdFromUrl) {
+            return new Promise(async resolve => {
+                let array = [];
+                for await (const emailId of solid.data[webIdFromUrl].vcard$hasEmail) {
+                    let email = await solid.data[`${emailId }`].vcard$value
+                    array.push(`${email}`);
+                }
+                resolve(array[0]);
+            });
+        }
 
-        $('.expand').click(function () {
-            $('#additional-info').toggle();
-            $(".sidebar").animate({
-                scrollTop: $(document).height()
-            }, "slow");
-            return false;
-        });
+        async function updateVcardPhone(webId, update) {
+            for await (const phoneId of solid.data[webId].vcard$hasTelephone) {
+                await solid.data[`${phoneId }`].vcard$value.set(update);
+            }
+        }
 
-        showFriends(webIdFromUrl);
+        function getVcardPhone(webIdFromUrl) {
+            return new Promise(async resolve => {
+                let array = [];
+                for await (const phoneNum of solid.data[webIdFromUrl].vcard$hasTelephone) {
+                    let phone = await solid.data[`${phoneNum}`].vcard$value;
+                    array.push(`${phone}`);
+                }
+                resolve(array[0]);
+            });
+        }
+
+        async function updateVcardRegion(webId, update) {
+            for await (const addressId of solid.data[webId].vcard$hasAddress) {
+                await solid.data[`${addressId }`].vcard$region.set(update);
+            }
+        }
+
+        async function updateVcardCountry(webId, update) {
+            for await (const addressId of solid.data[webId].vcard$hasAddress) {
+                await solid.data[addressId]["http://www.w3.org/2006/vcard/ns#country-name"].set(update);
+            }
+        }
+
+        function getVcardAddress(webIdFromUrl) {
+            return new Promise(async resolve => {
+                let array = [];
+                for await (const addressId of solid.data[webIdFromUrl].vcard$hasAddress) {
+                    console.log(`- ${addressId}`);
+                    let country = await solid.data[addressId]["http://www.w3.org/2006/vcard/ns#country-name"];
+                    let region = await solid.data[`${addressId}`].vcard$region;
+                    console.log(`${region}, ${country}`);
+                    array.push(`${region}`);
+                    array.push(`${country}`);
+                }
+                resolve(array);
+            });
+        }
+
     }
 });
