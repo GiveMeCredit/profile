@@ -136,7 +136,7 @@ $(document).ready(async function () {
         displayPosts();
 
         // If user is logged in, and on their own profile page
-        
+
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
             $('.sidebar .fa-save').show();
@@ -146,7 +146,7 @@ $(document).ready(async function () {
                 semantic: false,
                 resetCss: true
             });
-            
+
             // Check if DVO folders exist, if not, create them 
 
             try {
@@ -187,7 +187,7 @@ $(document).ready(async function () {
             }
 
             // Event Handlers that will only apply to a user if they are logged in, and on their own profile page
-            
+
             $(".edit-content").click(function () {
                 let $this = $(this);
                 editContent($this);
@@ -351,25 +351,34 @@ $(document).ready(async function () {
             let user = solid.data[session.webId];
             if (field === 'name') {
                 await user.vcard$fn.set(update);
-            } else if (field === 'role') {
+            }
+            if (field === 'role') {
                 await user.vcard$role.set(update);
-            } else if (field === 'email') {
+            }
+            if (field === 'email') {
                 update = "mailto:" + update;
                 await updateVcardEmail(session.webId, update);
-            } else if (field === 'phone') {
+            }
+            if (field === 'phone') {
                 update = "tel:" + update;
                 await updateVcardPhone(session.webId, update);
-            } else if (field === 'region') {
-                await updateVcardRegion(session.webId, update);
-            } else if (field === 'country') {
-                await updateVcardCountry(session.webId, update);
-            } else if (field === 'age') {
-                await await user.vcard$bday.set(update);
-            } else if (field == 'gender') {
-                await await user.foaf$gender.set(update);
-            } else {
-                alert(`Sorry, the item ${field} doesn't yet exist. Bear with me, i'm working on it.`);
             }
+            if (field === 'region') {
+                await updateVcardRegion(session.webId, update);
+            }
+            if (field === 'country') {
+                await updateVcardCountry(session.webId, update);
+            }
+            if (field === 'age') {
+                await user.vcard$bday.set(update);
+            }
+            if (field == 'gender') {
+                await user.foaf$gender.set(update);
+            }
+            if (field == 'profile-type') {
+                await user.vcard$category.set(update);
+            }
+
             alert(`${field} has been updated to ${update}`);
         }
 
