@@ -371,7 +371,7 @@ $(document).ready(async function () {
             } else {
                 alert(`Sorry, the item ${field} doesn't yet exist. Bear with me, i'm working on it.`);
             }
-            alert(`${field} has been update to ${update}`);
+            alert(`${field} has been updated to ${update}`);
         }
 
         async function updateVcardEmail(webId, update) {
