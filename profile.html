@@ -81,8 +81,7 @@
             </div>
             <div class="sidebar-sub-header expand">Additional Info <i class="fa fa-bars"></i></div>
             <div id="additional-info" style="display: none;">
-                <p style="text-align: center">This section is under construction.
-                    <br/>The options will change depending on the profile type.</p>
+                <p style="text-align: center">NOTE: The options will change depending on the profile type.</p>
                 <div class="row three-col">
                     <div>Profile Type:</div>
                     <div>
@@ -96,102 +95,126 @@
                     </div>
                     <div><i data-type="profile-type" class="fa fa-save"></i></div>
                 </div>
-
-                <div class="row three-col">
-                    <div>Gender:</div>
-                    <div>
-                        <select id="gender">
-                            <option value="Not specified">Not specified</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                <div id="personal" style="display: none">
+                    <div class="row three-col">
+                        <div>Gender:</div>
+                        <div>
+                            <select id="gender">
+                                <option value="Not specified">Not specified</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div><i data-type="gender" class="fa fa-save"></i></div>
                     </div>
-                    <div><i data-type="gender" class="fa fa-save"></i></div>
+
+                    <div class="row three-col">
+                        <div>Emp. Status:</div>
+                        <div>
+                            <select id="employment-status">
+                                <option value="Not specified">Not specified</option>
+                                <option value="Employed">Employed</option>
+                                <option value="Unemployed">Unemployed</option>
+                                <option value="Self-employed">Self-employed</option>
+                            </select>
+                        </div>
+                        <div><i data-type="employment-status" class="fa fa-save"></i></div>
+                    </div>
+
+                    <div class="row three-col">
+                        <div>Marital Status:</div>
+                        <div>
+                            <select id="marital-status">
+                                <option value="Not specified">Not specified</option>
+                                <option value="Single">Single</option>
+                                <option value="In a relationship">In a relationship</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Widowed">Widowed</option>
+                            </select>
+                        </div>
+                        <div><i data-type="marital-status" class="fa fa-save"></i></div>
+                    </div>
+
+                    <div class="row three-col">
+                        <div>S. Orientation:</div>
+                        <div>
+                            <select id="sexual-orientation">
+                                <option value="Not specified">Not specified</option>
+                                <option value="Hetrosexual">Hetrosexual</option>
+                                <option value="Homosexual">Homosexual</option>
+                                <option value="Bisexual">Bisexual</option>
+                            </select>
+                        </div>
+                        <div><i data-type="sexual-orientation" class="fa fa-save"></i></div>
+                    </div>
+
+                    <div class="row three-col">
+                        <div>Ethnicity:</div>
+                        <div>
+                            <select id="ethnicity">
+                                <option value="Not specified">Not specified</option>
+                                <option value="Black">Black</option>
+                                <option value="White">White</option>
+                                <option value="Asian">Asian</option>
+                                <option value="Hispanic">Hispanic</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div><i data-type="ethnicity" class="fa fa-save"></i></div>
+                    </div>
+
+                    <div class="row three-col">
+                        <div>Height:</div>
+                        <div>
+                            <select id="height">
+                                <option value="Not specified">Not specified</option>
+                                <option value="120cm">120 cm</option>
+                                <option value="121cm">121 cm</option>
+                                <option value="122cm">122 cm</option>
+                                <option value="183cm">183 cm</option>
+                            </select>
+                        </div>
+                        <div><i data-type="height" class="fa fa-save"></i></div>
+                    </div>
+
+                    <div class="row three-col">
+                        <div>Weight:</div>
+                        <div>
+                            <select id="weight">
+                                <option value="Not specified">Not specified</option>
+                                <option value="40kg">40 kg</option>
+                                <option value="41kg">41 kg</option>
+                                <option value="42kg">42 kg</option>
+                                <option value="76kg">76 kg</option>
+                            </select>
+                        </div>
+                        <div><i data-type="weight" class="fa fa-save"></i></div>
+                    </div>
                 </div>
-
-                <div class="row three-col">
-                    <div>Emp. Status:</div>
-                    <div>
-                        <select id="employment-status">
-                            <option value="Not specified">Not specified</option>
-                            <option value="Employed">Employed</option>
-                            <option value="Unemployed">Unemployed</option>
-                            <option value="Self-employed">Self-employed</option>
-                        </select>
+                <div id="business" style="display: none">
+                    <div class="row three-col">
+                        <div>Business Name:</div>
+                        <div>
+                            <input id="business-name" placeholder="Not Specified" />
+                        </div>
+                        <div><i data-type="business-name" class="fa fa-save"></i></div>
                     </div>
-                    <div><i data-type="employment-status" class="fa fa-save"></i></div>
-                </div>
-
-                <div class="row three-col">
-                    <div>Marital Status:</div>
-                    <div>
-                        <select id="marital-status">
-                            <option value="Not specified">Not specified</option>
-                            <option value="Single">Single</option>
-                            <option value="In a relationship">In a relationship</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                        </select>
+                    <div class="row three-col">
+                        <div>Position:</div>
+                        <div>
+                            <input id="position" placeholder="Not Specified" />
+                        </div>
+                        <div><i data-type="position" class="fa fa-save"></i></div>
                     </div>
-                    <div><i data-type="marital-status" class="fa fa-save"></i></div>
-                </div>
-
-                <div class="row three-col">
-                    <div>S. Orientation:</div>
-                    <div>
-                        <select id="sexual-orientation">
-                            <option value="Not specified">Not specified</option>
-                            <option value="Hetrosexual">Hetrosexual</option>
-                            <option value="Homosexual">Homosexual</option>
-                            <option value="Bisexual">Bisexual</option>
-                        </select>
+                    <div class="row three-col">
+                        <div>No. Employees:</div>
+                        <div>
+                            <input id="num-employees" placeholder="Not Specified" />
+                        </div>
+                        <div><i data-type="num-employees" class="fa fa-save"></i></div>
                     </div>
-                    <div><i data-type="sexual-orientation" class="fa fa-save"></i></div>
-                </div>
-
-                <div class="row three-col">
-                    <div>Ethnicity:</div>
-                    <div>
-                        <select id="ethnicity">
-                            <option value="Not specified">Not specified</option>
-                            <option value="Black">Black</option>
-                            <option value="White">White</option>
-                            <option value="Asian">Asian</option>
-                            <option value="Hispanic">Hispanic</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div><i data-type="ethnicity" class="fa fa-save"></i></div>
-                </div>
-
-                <div class="row three-col">
-                    <div>Height:</div>
-                    <div>
-                        <select id="height">
-                            <option value="Not specified">Not specified</option>
-                            <option value="120cm">120 cm</option>
-                            <option value="121cm">121 cm</option>
-                            <option value="122cm">122 cm</option>
-                            <option value="183cm">183 cm</option>
-                        </select>
-                    </div>
-                    <div><i data-type="height" class="fa fa-save"></i></div>
-                </div>
-
-                <div class="row three-col">
-                    <div>Weight:</div>
-                    <div>
-                        <select id="weight">
-                            <option value="Not specified">Not specified</option>
-                            <option value="40kg">40 kg</option>
-                            <option value="41kg">41 kg</option>
-                            <option value="42kg">42 kg</option>
-                            <option value="76kg">76 kg</option>
-                        </select>
-                    </div>
-                    <div><i data-type="weight" class="fa fa-save"></i></div>
                 </div>
                 <button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>
             </div>
