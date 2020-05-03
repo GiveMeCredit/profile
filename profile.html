@@ -22,87 +22,158 @@
         <div class="sidebar">
             <div class="sidebar-top">
                 <a class="home" href="index.html"><i class="fa fa-home"></i> Home</a><a id="login" class="active" href="index.html"><i class="fa fa-sign-in"></i> <span class="status">Login</span></a></div>
-            <div class="sidebar-header"><span id="name" class="editable-item">Guest User</span><span></span></div>
+            <div class="sidebar-header">
+                <input id="name" placeholder="Guest User"><i data-type="name" class="fa fa-save"></i></div>
             <div><img class="profile-photo" src="images/profilepic.jpg" /></div>
-            <div class="sidebar-sub-header"><span id="role" class="editable-item"></span><span></span></div>
+            <div class="sidebar-sub-header">
+                <input id="role"><i data-type="role" class="fa fa-save"></i></div>
             <div>
                 <button id="addFriend" class="add-friend btn btn-green">ADD FRIEND</button>
             </div>
             <div>
-                <div class="edit-icons" style="display: none"><i class="fa fa-close"></i><i class="fa fa-edit"></i></div>
-                <ul id="details">
-                    <!--<li><i class="fa fa-id-badge"></i> <a id="webId" target="_blank" href="#">WebID</a></li>-->
-                    <!--<i class="fa fa-hourglass"></i>-->
-                    <li>
-                        <div class="red-label">Age:</div><span id="age" class="editable-item">Enter DOB: YYYY-MM-DD</span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-at"></i>-->
-                        <div class="red-label">Email:</div><span id="email" class="editable-item">No email</span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-phone"></i>-->
-                        <div class="red-label">Tel:</div><span id="phone" class="editable-item">No phone</span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-map-marker"></i>-->
-                        <div class="red-label">Addr:</div><span id="region" class="editable-item">No region</span><span></span><span>, </span><span id="country" class="editable-item">No country</span><span></span></li>
-                </ul>
+                <div class="row three-col">
+                    <div>Age:</div>
+                    <div>
+                        <input id="age" placeholder="YYY-MM-DD" />
+                    </div>
+                    <div><i data-type="age" class="fa fa-save"></i></div>
+                </div>
+                <div class="row three-col">
+                    <div>Email:</div>
+                    <div>
+                        <input id="email" placeholder="No email" />
+                    </div>
+                    <div><i data-type="email" class="fa fa-save"></i></div>
+                </div>
+                <div class="row three-col">
+                    <div>Tel:</div>
+                    <div>
+                        <input id="phone" placeholder="No phone" />
+                    </div>
+                    <div><i data-type="phone" class="fa fa-save"></i></div>
+                </div>
+                <div class="row three-col">
+                    <div>Region:</div>
+                    <div>
+                        <input id="region" placeholder="No region" />
+                    </div>
+                    <div><i data-type="region" class="fa fa-save"></i></div>
+                </div>
+                <div class="row three-col">
+                    <div>Country:</div>
+                    <div>
+                        <input id="country" placeholder="No country" />
+                    </div>
+                    <div><i data-type="country" class="fa fa-save"></i></div>
+                </div>
+                <!-- <div class="row six-col">
+                    <div>Addr:</div>
+                    <div>
+                        <input id="region" placeholder="No region">
+                    </div>
+                    <div><i class="fa fa-save"></i></div>
+                    <div>, </div>
+                    <div>
+                        <input id="country" placeholder="No country">
+                    </div>
+                    <div><i class="fa fa-save"></i></div>
+                </div>-->
             </div>
             <div class="sidebar-sub-header expand">Additional Info <i class="fa fa-bars"></i></div>
             <div id="additional-info" style="display: none;">
                 <p style="text-align: center">This section is under construction.
                     <br/>The options will change depending on the profile type.</p>
-                <div class="edit-icons" style="display: none"><i class="fa fa-close"></i><i class="fa fa-edit"></i></div>
-                <ul>
-                    <li>
-                        <div class="red-label">Profile Type:</div><span id="profile-type">                        
-                        <select>
+                <div class="row three-col">
+                    <div>Profile Type:</div>
+                    <div>
+                        <select id="profile-type">
                             <option value="personal">Personal</option>
                             <option value="business">Business</option>
                             <option value="public-service">Public Service</option>
                             <option value="charity">Charity</option>
-                        </select></span><span></span></li>
-                    <li>
-                        <div class="red-label">Emp. Status:</div><span id="employment-status">                        
-                        <select>
+                        </select>
+                    </div>
+                    <div><i data-type="profile-type" class="fa fa-save"></i></div>
+                </div>
+
+                <div class="row three-col">
+                    <div>Gender:</div>
+                    <div>
+                        <select id="gender">
+                            <option value="none">Not specified</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div><i data-type="gender" class="fa fa-save"></i></div>
+                </div>
+
+                <div class="row three-col">
+                    <div>Emp. Status:</div>
+                    <div>
+                        <select id="employment-status">
                             <option value="employed">Employed</option>
                             <option value="unemployed">Unemployed</option>
                             <option value="self-employed">Self-employed</option>
-                        </select></span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-hourglass"></i>-->
-                        <div class="red-label">Marital Status:</div><span id="marital">
-                        <select>
+                        </select>
+                    </div>
+                    <div><i data-type="employment-status" class="fa fa-save"></i></div>
+                </div>
+
+                <div class="row three-col">
+                    <div>Marital Status:</div>
+                    <div>
+                        <select id="marital-status">
                             <option value="none">Not Specified</option>
                             <option value="single">Single</option>
                             <option value="in-a-relationship">In a relationship</option>
                             <option value="married">Married</option>
                             <option value="divorced">Divorced</option>
                             <option value="widowed">Widowed</option>
-                        </select></span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-phone"></i>-->
-                        <div class="red-label">Ethnicity:</div><span id="ethnicity"><select>
+                        </select>
+                    </div>
+                    <div><i data-type="marital-status" class="fa fa-save"></i></div>
+                </div>
+
+                <div class="row three-col">
+                    <div>Ethnicity:</div>
+                    <div>
+                        <select id="ethnicity">
                             <option value="none">Not Specified</option>
                             <option value="black">Black</option>
                             <option value="white">White</option>
                             <option value="asian">Asian</option>
                             <option value="hispanic">Hispanic</option>
                             <option value="other">Other</option>
-                        </select></span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-at"></i>-->
-                        <div class="red-label">Height:</div><span><span id="height"><select>
+                        </select>
+                    </div>
+                    <div><i data-type="ethnicity" class="fa fa-save"></i></div>
+                </div>
+
+                <div class="row three-col">
+                    <div>Height:</div>
+                    <div>
+                        <select id="height">
                             <option value="">120 cm</option>
                             <option value="">121 cm</option>
                             <option value="">122 cm</option>
-                        </select></span></span><span></span></li>
-                    <li>
-                        <!--<i class="fa fa-phone"></i>-->
-                        <div class="red-label">Weight:</div><span><span id="weight"><select>
-                            <option value="">40 kg</option>
-                            <option value="">41 kg</option>
-                            <option value="">42 kg</option>
-                        </select></span></span><span></span></li>
-                </ul>
+                        </select>
+                    </div>
+                    <div><i data-type="height" class="fa fa-save"></i></div>
+                </div>
+
+                <div class="row three-col">
+                    <div>Weight:</div>
+                    <div>
+                        <select id="weight">
+                            <option value="40">40 kg</option>
+                            <option value="41">41 kg</option>
+                            <option value="42">42 kg</option>
+                        </select>
+                    </div>
+                    <div><i data-type="weight" class="fa fa-save"></i></div>
+                </div>
                 <button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>
             </div>
         </div>

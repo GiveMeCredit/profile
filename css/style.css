@@ -167,61 +167,37 @@ hr {
 }*/
 
 .edit-icons .fa-close,
-.edit-icons .fa-edit, 
+.edit-icons .fa-edit,
 .edit-icons .fa-save {
     float: right;
     cursor: pointer;
     margin: 5px;
 }
-
-/*
-.edit-content,
-.edit-note {
-    float: right;
-    cursor: pointer;
-    margin: 5px;
-}
-.close-content,
-.close-note {
-    float: right;
-    cursor: pointer;
-    margin: 5px;
-}*/
-
 .sidebar .active {
     color: #dd4b39;
 }
 .sidebar a:hover {
     color: #dd4b39;
 }
-.sidebar li {
-    display: block;
-    padding: 10px 0px;
-    text-decoration: none;
-    color: #c1c1c1;
-    cursor: pointer;
-}
-.sidebar li {
+.row {
     border-bottom: 1px solid #222d32;
-    /*display: grid;
-    grid-template-columns: 50px auto auto;*/
-}
-
-.edit-details {
-    padding-left:10px;
-}
-.edit-details i {
-    padding-right:10px;
-}
-/* make this more generic so that it applies to any div that can be edited */
-.editable-item {
+    display: grid;
+    max-width: 340px;
+    padding: 10px 0px;
     cursor: pointer;
 }
-
-#details .red-label {
+.three-col {
+    grid-template-columns: 100px auto 20px;
+}
+.six-col {
+    grid-template-columns: 100px auto auto 20px auto 20px;
+}
+.row div:first-child {
     color: #dd4b39;
-    float: left;
-    width: 50px;
+}
+.sidebar .fa-save {
+    padding-left: 10px;
+    display: none;
 }
 .expand {
     cursor: pointer;
@@ -234,25 +210,39 @@ hr {
     display: block;
     margin: 20px auto;
 }
-.add-new-item .fa {
+#additional-info button .fa {
     margin-left: 10px;
 }
-#additional-info .red-label {
-    color: #dd4b39;
-    float: left;
-    width: 100px;
-}
-#additional-info select {
-    background: #28343a;
+.row select,
+.row input {
+    background: transparent;
     color: #c1c1c1;
     border: none;
-    width: 150px;
+    width: 200px;
+    font-family: 'OpenSans-Regular', Sans-Serif;
 }
-.sidebar-header {
-    text-align: center;
-    font-size: 16px;
+.three-col select {
+    width: 170px;
+    font-size: 13px;
+}
+#region,
+#country {
+    /*width: 80px;*/
+}
+#role,
+#name {
     color: #c1c1c1;
+    text-align: center;
     text-transform: capitalize;
+    background: transparent;
+    border: none;
+    font-family: 'OpenSans-Regular', Sans-Serif;
+}
+#name {
+    font-size: 16px;
+}
+#role {
+    font-size: 14px;
 }
 a.home {
     border-right: 1px solid #848484;
@@ -260,7 +250,8 @@ a.home {
 .name {
     text-transform: capitalize;
 }
-.sidebar-sub-header {
+.sidebar-sub-header,
+.sidebar-header {
     text-align: center;
     text-transform: capitalize;
 }
@@ -394,6 +385,7 @@ a.home {
 .post {
     margin-bottom: 20px;
 }
+
 /*.post-icons {
     border-top: 1px solid #e2e1e1;
     border-bottom: 1px solid #e2e1e1;
@@ -411,6 +403,7 @@ a.home {
     margin: 5px;
     cursor: pointer;
 }*/
+
 
 /****************** BUTTONS ********************/
 
@@ -482,6 +475,14 @@ a.home {
     .photos {
         display: grid;
         grid-template-columns: auto auto;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .three-col {
+        grid-template-columns: auto auto 20px;
+    }
+    .three-col input {
+        width: auto;
     }
 }
 

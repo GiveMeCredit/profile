@@ -55,7 +55,7 @@ $(document).ready(async function () {
     if (webIdFromUrl) {
 
         $('#addFriend').attr("href", webIdFromUrl);
-        
+
         // Expand additional information section on sidebar
         $('.expand').click(function () {
             $('#additional-info').toggle();
@@ -85,20 +85,20 @@ $(document).ready(async function () {
         // DISPLAY VCARD DATA
 
         document.title = fullName;
-        $('#name').html(`${fullName}`);
+        $('#name').val(`${fullName}`);
         $(".name").html(`${firstName}`);
-        if (role) $('#role').html(`${role}`);
+        if (role) $('#role').val(`${role}`);
         $('#webId').attr("href", webIdFromUrl);
         $(".profile-photo").attr("src", photo);
         if (note) $(".note").html(`${note}`);
         if (age) {
-            $('#age').html(`${age}`);
-            $('#age').removeClass('editable-item');
+            $('#age').val(`${age}`);
+            //$('#age').removeClass('editable-item');
         }
-        $('#email').html(email);
-        $('#phone').html(phone);
-        $('#region').html(address[0]);
-        $('#country').html(address[1]);
+        $('#email').val(email);
+        $('#phone').val(phone);
+        $('#region').val(address[0]);
+        $('#country').val(address[1]);
         $('#posts').html("");
 
         showFriends(webIdFromUrl);
@@ -134,7 +134,8 @@ $(document).ready(async function () {
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
             $('.edit-icons').show();
-            $('.post-icons').show();
+            $('.sidebar .fa-save').show();
+            //$('.post-icons').show();
             $('#add-new-post').show();
             $("#addPost").attr("placeholder", `What's on your mind, ${firstName}?`);
             $('#addPost').trumbowyg({
@@ -198,15 +199,8 @@ $(document).ready(async function () {
                 let $this = $(this);
                 editItem($this);
             });
-            $('.sidebar').on('click', '.fa-close', async function () {
-                $(this).parent().attr("contenteditable", 'false');
-                $('.edit-details').fadeOut('slow');
-            });
             $('.editable-item').click(function () {
                 $(this).attr("contenteditable", 'true').focus();
-                let field = $(this).attr('id');
-                console.log(field);
-                $(this).next('span').html(`<span class="edit-details"><i class="fa fa-save" data-field="${field}"></i><i class="fa fa-close" data-field="${field}"></i></span>`);
             });
             $('#addFriend').click(function () {
                 let $this = $(this);
@@ -344,8 +338,8 @@ $(document).ready(async function () {
         }
 
         async function editItem($this) {
-            let field = $this.attr("data-field");
-            let update = $(`#${field}`).html();
+            let field = $this.attr("data-type");
+            let update = $('#' + field).val();
             if (field === 'name') {
                 await solid.data[session.webId].vcard$name.set(update);
             } else if (field === 'role') {
@@ -362,10 +356,12 @@ $(document).ready(async function () {
                 await updateVcardCountry(session.webId, update);
             } else if (field === 'age') {
                 await solid.data[`${session.webId}`].vcard$bday.set(update);
+            } else if (field == 'gender') {
+                await solid.data[`${session.webId}`].foaf$gender.set(update);
             } else {
-                alert('Sorry, you need to login to update your profile');
+                alert(`Sorry, the item ${field} doesn't yet exist. Bear with me, i'm working on it.`);
             }
-            $('.edit-details').fadeOut('slow');
+            alert(`${field} has been update to ${update}`);
         }
 
         async function updateVcardEmail(webId, update) {
