@@ -135,19 +135,19 @@ $(document).ready(async function () {
 
         displayPosts();
 
-        // CHECK IF DVO FOLDER EXISTS
-        // CHECK THAT THE WEBID FROM THE QUERY STRING MATCHED THE LOGGED IN USERS WEBID
+        // If user is logged in, and on their own profile page
+        
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
-            // Not working $('.edit-icons').css("display", "block");
             $('.sidebar .fa-save').show();
-            //$('.post-icons').show();
             $('#add-new-post').show();
             $("#addPost").attr("placeholder", `What's on your mind, ${firstName}?`);
             $('#addPost').trumbowyg({
                 semantic: false,
                 resetCss: true
             });
+            
+            // Check if DVO folders exist, if not, create them 
 
             try {
                 await fileClient.readFolder(dvoFolder);
@@ -187,6 +187,7 @@ $(document).ready(async function () {
             }
 
             // Event Handlers that will only apply to a user if they are logged in, and on their own profile page
+            
             $(".edit-content").click(function () {
                 let $this = $(this);
                 editContent($this);
@@ -348,10 +349,11 @@ $(document).ready(async function () {
         async function editItem($this) {
             let field = $this.attr("data-type");
             let update = $('#' + field).val();
+            let user = solid.data[session.webId];
             if (field === 'name') {
-                await solid.data[session.webId].vcard$name.set(update);
+                await user.vcard$fn.set(update);
             } else if (field === 'role') {
-                await solid.data[session.webId].vcard$role.set(update);
+                await user.vcard$role.set(update);
             } else if (field === 'email') {
                 update = "mailto:" + update;
                 await updateVcardEmail(session.webId, update);
@@ -363,9 +365,9 @@ $(document).ready(async function () {
             } else if (field === 'country') {
                 await updateVcardCountry(session.webId, update);
             } else if (field === 'age') {
-                await solid.data[`${session.webId}`].vcard$bday.set(update);
+                await await user.vcard$bday.set(update);
             } else if (field == 'gender') {
-                await solid.data[`${session.webId}`].foaf$gender.set(update);
+                await await user.foaf$gender.set(update);
             } else {
                 alert(`Sorry, the item ${field} doesn't yet exist. Bear with me, i'm working on it.`);
             }
