@@ -187,7 +187,7 @@ hr {
     cursor: pointer;
 }
 .three-col {
-    grid-template-columns: 100px auto 20px;
+    grid-template-columns: 110px auto 20px;
 }
 .six-col {
     grid-template-columns: 100px auto auto 20px auto 20px;

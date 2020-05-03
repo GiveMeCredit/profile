@@ -32,11 +32,17 @@
             </div>
             <div>
                 <div class="row three-col">
-                    <div>Age:</div>
+                    <div>Profile Type:</div>
                     <div>
-                        <input id="age" placeholder="YYY-MM-DD" />
+                        <select id="profile-type">
+                            <option value="Personal">Personal</option>
+                            <option value="Business">Business</option>
+                            <option value="Public service">Public service</option>
+                            <option value="Charity">Charity</option>
+                            <option value="All">All of the above</option>
+                        </select>
                     </div>
-                    <div><i data-type="age" class="fa fa-save"></i></div>
+                    <div><i data-type="profile-type" class="fa fa-save"></i></div>
                 </div>
                 <div class="row three-col">
                     <div>Email:</div>
@@ -81,21 +87,15 @@
             </div>
             <div class="sidebar-sub-header expand">Additional Info <i class="fa fa-bars"></i></div>
             <div id="additional-info" style="display: none;">
-                <p style="text-align: center">NOTE: The options will change depending on the profile type.</p>
-                <div class="row three-col">
-                    <div>Profile Type:</div>
-                    <div>
-                        <select id="profile-type">
-                            <option value="Personal">Personal</option>
-                            <option value="Business">Business</option>
-                            <option value="Public service">Public service</option>
-                            <option value="Charity">Charity</option>
-                            <option value="All">All of the above</option>
-                        </select>
-                    </div>
-                    <div><i data-type="profile-type" class="fa fa-save"></i></div>
-                </div>
+                <p style="text-align: center">The options will change depending on the profile type.</p>
                 <div id="personal" style="display: none">
+                    <div class="row three-col">
+                        <div>Age:</div>
+                        <div>
+                            <input id="age" placeholder="YYY-MM-DD" />
+                        </div>
+                        <div><i data-type="age" class="fa fa-save"></i></div>
+                    </div>
                     <div class="row three-col">
                         <div>Gender:</div>
                         <div>
