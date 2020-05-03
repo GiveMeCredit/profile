@@ -133,7 +133,7 @@ $(document).ready(async function () {
         // CHECK THAT THE WEBID FROM THE QUERY STRING MATCHED THE LOGGED IN USERS WEBID
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
-            $('.edit-icons').show();
+            $('.edit-icons').css("display", "block");
             $('.sidebar .fa-save').show();
             //$('.post-icons').show();
             $('#add-new-post').show();
@@ -234,8 +234,9 @@ $(document).ready(async function () {
                     for (let i = 0; i < array.length; i++) {
                         let label = array[i]['label'];
                         let id = label.split('.');
-                        await $.get(array[i]['url'], '', function (data) {
-                            $("#posts").prepend(`<div class="edit-icons"><i data-button-type='${id[0]}' class="delete-post fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
+                        $.get(array[i]['url'], '', function (data) {
+                            $("#posts").prepend(`<div class="edit-icons" style="display:none"><i data-button-type='${id[0]}' class="delete-post fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
+                            if (session) $('.edit-icons').css("display", "block");
                         });
                     }
                 }
