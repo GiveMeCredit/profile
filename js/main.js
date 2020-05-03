@@ -55,6 +55,15 @@ $(document).ready(async function () {
     if (webIdFromUrl) {
 
         $('#addFriend').attr("href", webIdFromUrl);
+        
+        // Expand additional information section on sidebar
+        $('.expand').click(function () {
+            $('#additional-info').toggle();
+            $(".sidebar").animate({
+                scrollTop: $(document).height()
+            }, "slow");
+            return false;
+        });
 
         // LOAD VCARD DATA  - js/functions/vcard.js
         //await fetcher.load(webIdFromUrl); // Do i still need this? 
@@ -170,7 +179,7 @@ $(document).ready(async function () {
                 $(".editable").html(`${await about}`);
             }
 
-            // Event Handlers
+            // Event Handlers that will only apply to a user if they are logged in, and on their own profile page
             $(".edit-content").click(function () {
                 let $this = $(this);
                 editContent($this);
@@ -193,20 +202,11 @@ $(document).ready(async function () {
                 $(this).parent().attr("contenteditable", 'false');
                 $('.edit-details').fadeOut('slow');
             });
-
             $('.editable-item').click(function () {
                 $(this).attr("contenteditable", 'true').focus();
                 let field = $(this).attr('id');
                 console.log(field);
                 $(this).next('span').html(`<span class="edit-details"><i class="fa fa-save" data-field="${field}"></i><i class="fa fa-close" data-field="${field}"></i></span>`);
-            });
-
-            $('.expand').click(function () {
-                $('#additional-info').toggle();
-                $(".sidebar").animate({
-                    scrollTop: $(document).height()
-                }, "slow");
-                return false;
             });
             $('#addFriend').click(function () {
                 let $this = $(this);
