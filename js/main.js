@@ -93,6 +93,7 @@ $(document).ready(async function () {
         let maritalStatus = await user.vcard$maritalStatus;
         let sexualOrientation = await user.vcard$sexualOrientation;
         let ethnicity = await user.vcard$ethnicity;
+        let religion = await user.vcard$religion;
         let height = await user.vcard$height;
         let weight = await user.vcard$weight;
 
@@ -126,6 +127,7 @@ $(document).ready(async function () {
                 $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
                 $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
                 $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
+                $(`#religion option[value="${religion}"]`).prop("selected", true);
                 $(`#height option[value="${height}"]`).prop("selected", true);
                 $(`#weight option[value="${weight}"]`).prop("selected", true);
             }
@@ -420,6 +422,9 @@ $(document).ready(async function () {
             }
             if (field === 'ethnicity') {
                 await user.vcard$ethnicity.set(update);
+            }
+            if (field === 'religion') {
+                await user.vcard$religion.set(update);
             }
             if (field === 'height') {
                 await user.vcard$height.set(update);

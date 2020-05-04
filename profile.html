@@ -166,6 +166,24 @@
                     </div>
 
                     <div class="row three-col">
+                        <div>Religion:</div>
+                        <div>
+                            <select id="religion">
+                                <option value="Not specified">Not specified</option>
+                                <option value="Non-religious">Non-religious</option>
+                                <option value="Christianity">Christianity</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Hinduism">Hinduism</option>
+                                <option value="Sikhism">Sikhism</option>
+                                <option value="Judaism">Judaism</option>
+                                <option value="Buddhism">Buddhism</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div><i data-type="religion" class="fa fa-save"></i></div>
+                    </div>
+
+                    <div class="row three-col">
                         <div>Height:</div>
                         <div>
                             <select id="height">
@@ -194,6 +212,7 @@
                     </div>
                 </div>
                 <div id="business" style="display: none">
+                    <p style="text-align: center">UNDER CONSTRUCTION</p>
                     <div class="row three-col">
                         <div>Business Name:</div>
                         <div>
@@ -209,11 +228,25 @@
                         <div><i data-type="position" class="fa fa-save"></i></div>
                     </div>
                     <div class="row three-col">
-                        <div>No. Employees:</div>
+                        <div>Employees:</div>
                         <div>
-                            <input id="num-employees" placeholder="Not Specified" />
+                            <select id="num-employees">
+                                <option value="Not specified">Not specified</option>
+                                <option value="0+">0+</option>
+                                <option value="50+">50+</option>
+                                <option value="100+">100+</option>
+                                <option value="200+">200+</option>
+                                <option value="1000+">1000+</option>
+                            </select>
                         </div>
                         <div><i data-type="num-employees" class="fa fa-save"></i></div>
+                    </div>
+                    <div class="row three-col">
+                        <div>Annual Turnover:</div>
+                        <div>
+                            <input id="annual-turnover" placeholder="Not Specified" />
+                        </div>
+                        <div><i data-type="annual-turnover" class="fa fa-save"></i></div>
                     </div>
                 </div>
                 <button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>
