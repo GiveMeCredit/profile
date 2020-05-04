@@ -173,6 +173,7 @@ $(document).ready(async function () {
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
             $('.sidebar .fa-save').show();
+            $('.edit-icons').show();
             $('#add-new-post').show();
             $("#addPost").attr("placeholder", `What's on your mind, ${firstName}?`);
             $('#addPost').trumbowyg({
