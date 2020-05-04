@@ -183,7 +183,7 @@ hr {
     border-bottom: 1px solid #222d32;
     display: grid;
     max-width: 340px;
-    padding: 10px 0px;
+    padding: 5px 0px;
     cursor: pointer;
 }
 .three-col {
@@ -222,6 +222,10 @@ hr {
     width: 200px;
     font-family: 'OpenSans-Regular', Sans-Serif;
 }
+.row input {
+    padding:0 3px;
+}
+
 .three-col select {
     width: 170px;
     font-size: 13px;
