@@ -60,7 +60,7 @@ $(document).ready(async function () {
         type: "ping"
     });
     port.onMessage.addListener(function (res) {
-        console.log("res " + res);
+        console.log(res.type);
         if (res.type === "pong") {
             dvoInstalled = true;
             //alert('All good! But you will need re-enter your password in order to login to the DVO extension');
