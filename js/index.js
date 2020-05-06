@@ -77,7 +77,7 @@ $(document).ready(async function () {
         if (dvoInstalled) {
             $('#gun-password').show();
         } else {
-            console.log(`There user doesn't have the DVO extension installed`);
+            console.log(`The user doesn't have the DVO extension installed`);
         }
     }
 
