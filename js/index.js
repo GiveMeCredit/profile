@@ -54,7 +54,18 @@ $(document).ready(async function () {
     }*/
 
     let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
-    let port;
+    let port = chrome.runtime.connect(laserExtensionId);
+    let dvoInstalled = false;
+    port.postMessage({
+        type: "ping"
+    });
+    port.onMessage.addListener(function (res) {
+        console.log("res " + res);
+        if (res.type === "pong") {
+            dvoInstalled = true;
+            //alert('All good! But you will need re-enter your password in order to login to the DVO extension');
+        }
+    });
 
     const session = await solid.auth.currentSession();
     if (session) {
@@ -63,19 +74,9 @@ $(document).ready(async function () {
         $('.login-status').html(`Welcome ${firstName[0]}! <a id="logout" href="">Logout</a>`);
         $('#viewProfile').css("display", "block");
         $('.home-page-login').hide();
-        try {
-            port = chrome.runtime.connect(laserExtensionId);
-            port.postMessage({
-                type: "ping"
-            });
-            port.onMessage.addListener(function (res) {
-                console.log("res " + res);
-                if (res.type === "pong") {
-                    $('#gun-password').show();
-                    //alert('All good! But you will need re-enter your password in order to login to the DVO extension');
-                }
-            });
-        } catch (e) {
+        if (dvoInstalled) {
+            $('#gun-password').show();
+        } else {
             console.log(`There user doesn't have the DVO extension installed`);
         }
     }
