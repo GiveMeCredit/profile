@@ -229,6 +229,7 @@ hr {
 .three-col select {
     width: 170px;
     font-size: 13px;
+    box-sizing: border-box;
 }
 
 #role,
@@ -238,6 +239,7 @@ hr {
     text-transform: capitalize;
     background: transparent;
     border: none;
+    padding:0;
     width:100%;
     font-family: 'OpenSans-Regular', Sans-Serif;
 }

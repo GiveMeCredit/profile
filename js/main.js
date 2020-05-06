@@ -34,15 +34,17 @@ $(document).ready(async function () {
         if (await checkFriends(me, them)) {
             $('#addFriend').text('UNFRIEND');
         }
-
-        if (await checkFriends(me, them)) {
-            $('#addFriend').text('UNFRIEND');
-        }
         // automatically add Glen as friend (for tech support)
         let glen = 'https://devolution.inrupt.net/profile/card#me';
         if (!await checkFriends(me, glen)) {
             await me.friends.add(glen);
         }
+        /* logout not working
+        $('#login').click(function () {
+            e.preventDefault;
+            solid.auth.logout();
+            localStorage.removeItem("solid-auth-client");
+        });*/
     }
 
     async function checkFriends(me, them) {
@@ -221,7 +223,6 @@ $(document).ready(async function () {
             }
 
             // Event Handlers that will only apply to a user if they are logged in, and on their own profile page
-
             $(".edit-content").click(function () {
                 let $this = $(this);
                 editContent($this);
