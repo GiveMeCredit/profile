@@ -53,19 +53,27 @@ $(document).ready(async function () {
 
     }*/
 
+    let dvoInstalled = false;
     let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
     let port = chrome.runtime.connect(laserExtensionId);
-    let dvoInstalled = false;
-    port.postMessage({
-        type: "ping"
-    });
-    port.onMessage.addListener(function (res) {
-        console.log(res.type);
-        if (res.type === "pong") {
-            dvoInstalled = true;
-            //alert('All good! But you will need re-enter your password in order to login to the DVO extension');
-        }
-    });
+    dvoInstalled = await isDVOInstalled();
+    console.log("DVO installed " + dvoInstalled);
+    async function isDVOInstalled() {
+        return new Promise(resolve => {
+            port.postMessage({
+                type: "ping"
+            });
+            port.onMessage.addListener(function (res) {
+                console.log(res.type);
+                if (res.type === "pong") {
+                    resolve(true);
+                }
+            });
+            setTimeout(function () {
+                resolve(false);
+            }, 1000);
+        });
+    }
 
     const session = await solid.auth.currentSession();
     if (session) {
