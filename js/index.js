@@ -71,7 +71,7 @@ $(document).ready(async function () {
             });
             setTimeout(function () {
                 resolve(false);
-            }, 1000);
+            }, 2000);
         });
     }
 
