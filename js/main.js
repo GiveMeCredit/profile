@@ -9,14 +9,18 @@ const fileClient = SolidFileClient;
 $(document).ready(async function () {
     const session = await solid.auth.currentSession();
 
+    /* getWebIdFromUrl() will get the web ID from the query string and then strip it down to username.host.tld. e.g. 
+    devolution.inrupt.net. Then it will update the query string. This will make the url shorter, but also allow people 
+    to enter their full web Id (perhaps they will copy and paste it). */
+    
     function getWebIdFromUrl() {
         let urlParams = new URLSearchParams(window.location.search);
         let webIdFromUrl = urlParams.get('webId');
-        console.log(webIdFromUrl);
         var pattern = /^http(s?):\/\//i;
         if (pattern.test(webIdFromUrl)) {
             let withoutHttps = webIdFromUrl.replace(pattern, "");
             webIdFromUrl = withoutHttps.substring(0, withoutHttps.indexOf("/"));
+            // This could be outside of the function
             window.history.pushState(`?webId=${webIdFromUrl}`, "Title", `?webId=${webIdFromUrl}`);
         }
         return webIdFromUrl;
@@ -29,11 +33,9 @@ $(document).ready(async function () {
     }
 
     // CHECK QUERY STRING FOR WEBID
-    let webIdFromUrl = getWebIdFromUrl(); // e.g. https://devolution.inrupt.net/profile/card
-    console.log(webIdFromUrl);
+    let webIdFromUrl = getWebIdFromUrl(); // e.g. devolution.inrupt.net
     webIdFromUrl = `https://${webIdFromUrl}/profile/card#me`; // e.g https://devolution.inrupt.net/profile/card#me
     let webIdOrigin = getWebIdOrigin(webIdFromUrl); // e.g. https://devolution.inrupt.net/
-
     let dvoFolder = `${webIdOrigin}/public/DVO/`; // e.g. https://devolution.inrupt.net/public/DVO/
 
     if (session) {
