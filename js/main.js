@@ -12,6 +12,13 @@ $(document).ready(async function () {
     function getWebIdFromUrl() {
         let urlParams = new URLSearchParams(window.location.search);
         let webIdFromUrl = urlParams.get('webId');
+        console.log(webIdFromUrl);
+        var pattern = /^http(s?):\/\//i;
+        if (pattern.test(webIdFromUrl)) {
+            let withoutHttps = webIdFromUrl.replace(pattern, "");
+            webIdFromUrl = withoutHttps.substring(0, withoutHttps.indexOf("/"));
+            window.history.pushState(`?webId=${webIdFromUrl}`, "Title", `?webId=${webIdFromUrl}`);
+        }
         return webIdFromUrl;
     }
 
@@ -23,8 +30,10 @@ $(document).ready(async function () {
 
     // CHECK QUERY STRING FOR WEBID
     let webIdFromUrl = getWebIdFromUrl(); // e.g. https://devolution.inrupt.net/profile/card
-    webIdFromUrl = webIdFromUrl + "#me"; // e.g https://devolution.inrupt.net/profile/card#me
-    let webIdOrigin = await getWebIdOrigin(webIdFromUrl); // e.g. https://devolution.inrupt.net/
+    console.log(webIdFromUrl);
+    webIdFromUrl = `https://${webIdFromUrl}/profile/card#me`; // e.g https://devolution.inrupt.net/profile/card#me
+    let webIdOrigin = getWebIdOrigin(webIdFromUrl); // e.g. https://devolution.inrupt.net/
+
     let dvoFolder = `${webIdOrigin}/public/DVO/`; // e.g. https://devolution.inrupt.net/public/DVO/
 
     if (session) {
