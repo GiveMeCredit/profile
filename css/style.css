@@ -182,7 +182,7 @@ hr {
 .row {
     border-bottom: 1px solid #222d32;
     display: grid;
-    max-width: 340px;
+    /*max-width: 340px;*/
     padding: 5px 0px;
     cursor: pointer;
 }
@@ -195,9 +195,7 @@ hr {
 .row div:first-child {
     color: #dd4b39;
 }
-
 .sidebar .fa-save {
-    /*padding-left: 10px;*/
     display: none;
 }
 .expand {
@@ -223,15 +221,18 @@ hr {
     font-family: 'OpenSans-Regular', Sans-Serif;
 }
 .row input {
-    padding:0 3px;
+    padding: 0 3px;
 }
-
 .three-col select {
     width: 170px;
     font-size: 13px;
     box-sizing: border-box;
 }
-
+.sidebar-header-grid {
+    display: grid;
+    grid-template-columns: 20px auto 20px;
+    line-height: 20px;
+}
 #role,
 #name {
     color: #c1c1c1;
@@ -239,7 +240,7 @@ hr {
     text-transform: capitalize;
     background: transparent;
     border: none;
-    padding:0;
+    padding: 0;
     width:100%;
     font-family: 'OpenSans-Regular', Sans-Serif;
 }
@@ -268,7 +269,6 @@ a.home {
     border: 5px solid #848484;
     border-radius: 50%;
 }
-
 .content ul {
     margin-bottom: 20px;
 }
@@ -287,7 +287,6 @@ a.home {
     margin-right: 10px;
     content: "\27A4";
 }
-
 .col {
     padding: 20px;
     overflow-y: scroll;
@@ -344,8 +343,6 @@ a.home {
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     box-sizing: border-box;
 }
-
-
 .post {
     margin-bottom: 20px;
 }
