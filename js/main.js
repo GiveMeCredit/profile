@@ -235,7 +235,7 @@ $(document).ready(async function () {
                 editNote($this);
             });
             $(".close-note").click(function () {
-                $('.editable').trumbowyg('destroy');
+                $('.note').trumbowyg('destroy');
             });
             $('.sidebar').on('click', '.fa-save', function () {
                 let $this = $(this);
