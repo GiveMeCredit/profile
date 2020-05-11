@@ -12,7 +12,7 @@ $(document).ready(async function () {
     /* getWebIdFromUrl() will get the web ID from the query string and then strip it down to username.host.tld. e.g. 
     devolution.inrupt.net. Then it will update the query string. This will make the url shorter, but also allow people 
     to enter their full web Id (perhaps they will copy and paste it). */
-    
+
     function getWebIdFromUrl() {
         let urlParams = new URLSearchParams(window.location.search);
         let webIdFromUrl = urlParams.get('webId');
@@ -41,15 +41,22 @@ $(document).ready(async function () {
     if (session) {
         $('.home').attr('href', '?webId=' + session.webId);
         const me = await solid.data[session.webId];
-        const them = webIdOrigin;
-        if (await checkFriends(me, them)) {
+        const them = await solid.data[webIdFromUrl];
+        let iHaveAddedThem = await checkFriends(me, them);
+        let theyHaveAddedMe = await checkFriends(them, me);
+
+        if (iHaveAddedThem && theyHaveAddedMe) {
             $('#addFriend').text('UNFRIEND');
+        } else if (iHaveAddedThem) {
+            $('#addFriend').text('REQUEST SENT');
+        } else if (theyHaveAddedMe) {
+            $('#addFriend').text('CONFIRM REQUEST');
         }
         // automatically add Glen as friend (for tech support)
-        let glen = 'https://devolution.inrupt.net/profile/card#me';
+        /*let glen = 'https://devolution.inrupt.net/profile/card#me';
         if (!await checkFriends(me, glen)) {
             await me.friends.add(glen);
-        }
+        }*/
         /* logout not working
         $('#login').click(function () {
             e.preventDefault;
@@ -58,12 +65,12 @@ $(document).ready(async function () {
         });*/
     }
 
-    async function checkFriends(me, them) {
+    async function checkFriends(subject, object) {
+        console.log(`Has ${subject} added ${object}?`);
         return new Promise(async resolve => {
-            for await (const friend of me.friends) {
-                let isFriend = await getWebIdOrigin(friend); // remove /profile/card#me to ensure consistency
-                if (them === isFriend) {
-                    //console.log(`  - ${me} is a friend of ${isFriend}`);
+            for await (const friend of subject.friends) {
+                //let isFriend = await getWebIdOrigin(friend); // remove /profile/card#me to ensure consistency
+                if (`${friend }` === `${object}`) {
                     resolve(true);
                 }
             }
@@ -157,7 +164,7 @@ $(document).ready(async function () {
         async function showFriends(webId) {
             const subject = await solid.data[webId];
             for await (const friend of subject.friends) {
-                console.log(`  - ${await friend} is a friend of ${await fullName}`);
+                //console.log(`  - ${await friend} is a friend of ${await fullName}`);
                 // need to make sure that all urls are consistent
                 try {
                     let fr = `${await getWebIdOrigin(await friend)}/profile/card#me`;
