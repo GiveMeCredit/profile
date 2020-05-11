@@ -195,7 +195,7 @@ hr {
 .row div:first-child {
     color: #dd4b39;
 }
-.sidebar .fa-save {
+.sidebar .save {
     display: none;
 }
 .expand {

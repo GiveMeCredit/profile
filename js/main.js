@@ -193,7 +193,7 @@ $(document).ready(async function () {
 
         if (session && (session.webId === webIdFromUrl)) {
             $('.status').html('Logout');
-            $('.sidebar .fa-save').show();
+            $('.sidebar .save').show();
             $('.edit-icons').show();
             $('#add-new-post').show();
             $("#addPost").attr("placeholder", `What's on your mind, ${firstName}?`);
@@ -283,7 +283,6 @@ $(document).ready(async function () {
                 deletePost($this);
             });
             $('#copy').on('click', function () {
-                alert('testing');
                 let output = document.getElementById('webId');
                 output.select();
                 document.execCommand("copy");
