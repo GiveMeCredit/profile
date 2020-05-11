@@ -123,7 +123,6 @@ $(document).ready(async function () {
         $('#name').val(`${fullName}`);
         $(".name").html(`${firstName}`);
         if (role) $('#role').val(`${role}`);
-        //$('#webId').attr("href", webIdFromUrl);
         $('#webId').val(webIdFromUrl);
         $(".profile-photo").attr("src", photo);
         if (note) $(".note").html(`${note}`);
