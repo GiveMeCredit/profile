@@ -123,7 +123,8 @@ $(document).ready(async function () {
         $('#name').val(`${fullName}`);
         $(".name").html(`${firstName}`);
         if (role) $('#role').val(`${role}`);
-        $('#webId').attr("href", webIdFromUrl);
+        //$('#webId').attr("href", webIdFromUrl);
+        $('#webId').val(webIdFromUrl);
         $(".profile-photo").attr("src", photo);
         if (note) $(".note").html(`${note}`);
         if (age) {
@@ -280,6 +281,12 @@ $(document).ready(async function () {
             $('.content').on('click', '.delete-post', function () {
                 let $this = $(this);
                 deletePost($this);
+            });
+            $('#copy').on('click', function () {
+                alert('testing');
+                let output = document.getElementById('webId');
+                output.select();
+                document.execCommand("copy");
             });
         }
 

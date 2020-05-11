@@ -28,7 +28,7 @@
                 <div>
                     <input id="name" placeholder="Guest User">
                 </div>
-                <div><i data-type="name" class="fa fa-save"></i></div>
+                <div><button class="btn-small btn-yellow"><i data-type="name" class="fa fa-save"></i></button></div>
             </div>
             <div><img class="profile-photo" src="images/profilepic.jpg" /></div>
             <div class="sidebar-sub-header  sidebar-header-grid">
@@ -36,12 +36,21 @@
                 <div>
                     <input id="role">
                 </div>
-                <div><i data-type="role" class="fa fa-save"></i></div>
+                <div><button class="btn-small btn-yellow"><i data-type="role" class="fa fa-save"></i></button></div>
             </div>
             <div>
                 <button id="addFriend" class="add-friend btn btn-green">ADD FRIEND</button>
             </div>
             <div>
+                <div class="row three-col">
+                    <div>Web ID:</div>
+                    <div>
+                        <input id="webId" />
+                    </div>
+                    <div>
+                        <button id="copy" class="btn-small btn-yellow"><i class="fa fa-copy"></i></button>
+                    </div>
+                </div>
                 <div class="row three-col">
                     <div>Profile Type:</div>
                     <div>
@@ -53,35 +62,35 @@
                             <option value="All">All of the above</option>
                         </select>
                     </div>
-                    <div><i data-type="profile-type" class="fa fa-save"></i></div>
+                    <div><button class="btn-small btn-yellow"><i data-type="profile-type" class="fa fa-save"></i></button></div>
                 </div>
                 <div class="row three-col">
                     <div>Email:</div>
                     <div>
                         <input id="email" placeholder="No email" />
                     </div>
-                    <div><i data-type="email" class="fa fa-save"></i></div>
+                    <div><button class="btn-small btn-yellow"><i data-type="email" class="fa fa-save"></i></button></div>
                 </div>
                 <div class="row three-col">
                     <div>Tel:</div>
                     <div>
                         <input id="phone" placeholder="No phone" />
                     </div>
-                    <div><i data-type="phone" class="fa fa-save"></i></div>
+                    <div><button class="btn-small btn-yellow"><i data-type="phone" class="fa fa-save"></i></button></div>
                 </div>
                 <div class="row three-col">
                     <div>Region:</div>
                     <div>
                         <input id="region" placeholder="No region" />
                     </div>
-                    <div><i data-type="region" class="fa fa-save"></i></div>
+                    <div><button class="btn-small btn-yellow"><i data-type="region" class="fa fa-save"></i></button></div>
                 </div>
                 <div class="row three-col">
                     <div>Country:</div>
                     <div>
                         <input id="country" placeholder="No country" />
                     </div>
-                    <div><i data-type="country" class="fa fa-save"></i></div>
+                    <div><button class="btn-small btn-yellow"><i data-type="country" class="fa fa-save"></i></button></div>
                 </div>
                 <!-- <div class="row six-col">
                     <div>Addr:</div>
@@ -105,7 +114,7 @@
                         <div>
                             <input id="age" placeholder="YYYY-MM-DD" />
                         </div>
-                        <div><i data-type="age" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="age" class="fa fa-save"></i></button></div>
                     </div>
                     <div class="row three-col">
                         <div>Gender:</div>
@@ -117,7 +126,7 @@
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        <div><i data-type="gender" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="gender" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -130,7 +139,7 @@
                                 <option value="Self-employed">Self-employed</option>
                             </select>
                         </div>
-                        <div><i data-type="employment-status" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="employment-status" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -145,7 +154,7 @@
                                 <option value="Widowed">Widowed</option>
                             </select>
                         </div>
-                        <div><i data-type="marital-status" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="marital-status" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -158,7 +167,7 @@
                                 <option value="Bisexual">Bisexual</option>
                             </select>
                         </div>
-                        <div><i data-type="sexual-orientation" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="sexual-orientation" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -173,7 +182,7 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div><i data-type="ethnicity" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="ethnicity" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -191,7 +200,7 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div><i data-type="religion" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="religion" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -205,7 +214,7 @@
                                 <option value="183cm">183 cm</option>
                             </select>
                         </div>
-                        <div><i data-type="height" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="height" class="fa fa-save"></i></button></div>
                     </div>
 
                     <div class="row three-col">
@@ -219,7 +228,7 @@
                                 <option value="76kg">76 kg</option>
                             </select>
                         </div>
-                        <div><i data-type="weight" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="weight" class="fa fa-save"></i></button></div>
                     </div>
                 </div>
                 <div id="business" style="display: none">
@@ -229,14 +238,14 @@
                         <div>
                             <input id="business-name" placeholder="Not Specified" />
                         </div>
-                        <div><i data-type="business-name" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="business-name" class="fa fa-save"></i></button></div>
                     </div>
                     <div class="row three-col">
                         <div>Position:</div>
                         <div>
                             <input id="position" placeholder="Not Specified" />
                         </div>
-                        <div><i data-type="position" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="position" class="fa fa-save"></i></button></div>
                     </div>
                     <div class="row three-col">
                         <div>Employees:</div>
@@ -250,17 +259,17 @@
                                 <option value="1000+">1000+</option>
                             </select>
                         </div>
-                        <div><i data-type="num-employees" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="num-employees" class="fa fa-save"></i></button></div>
                     </div>
                     <div class="row three-col">
                         <div>Annual Turnover:</div>
                         <div>
                             <input id="annual-turnover" placeholder="Not Specified" />
                         </div>
-                        <div><i data-type="annual-turnover" class="fa fa-save"></i></div>
+                        <div><button class="btn-small btn-yellow"><i data-type="annual-turnover" class="fa fa-save"></i></button></div>
                     </div>
                 </div>
-                <button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>
+                <!--<button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>-->
             </div>
         </div>
         <div class="content">
