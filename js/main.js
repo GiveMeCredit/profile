@@ -38,6 +38,13 @@ $(document).ready(async function () {
     let webIdOrigin = getWebIdOrigin(webIdFromUrl); // e.g. https://devolution.inrupt.net/
     let dvoFolder = `${webIdOrigin}/public/DVO/`; // e.g. https://devolution.inrupt.net/public/DVO/
 
+    // Copy Web ID to clipboard
+    $('#copy').click(function () {
+        let output = document.getElementById('webId');
+        output.select();
+        document.execCommand("copy");
+    });
+
     if (session) {
         $('.home').attr('href', '?webId=' + session.webId);
         const me = await solid.data[session.webId];
@@ -280,11 +287,6 @@ $(document).ready(async function () {
             $('.content').on('click', '.delete-post', function () {
                 let $this = $(this);
                 deletePost($this);
-            });
-            $('#copy').on('click', function () {
-                let output = document.getElementById('webId');
-                output.select();
-                document.execCommand("copy");
             });
         }
 
