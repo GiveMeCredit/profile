@@ -183,7 +183,7 @@ hr {
     border-bottom: 1px solid #222d32;
     display: grid;
     /*max-width: 340px;*/
-    padding: 5px 0px;
+    padding: 5px 0;
     cursor: pointer;
 }
 .three-col {
@@ -205,19 +205,25 @@ hr {
     float: right;
     font-size: 18px;
 }
+
+/*
 #additional-info .btn {
     display: block;
     margin: 20px auto;
-}
+}*/
+
+
 /*#additional-info button .fa {
     margin-left: 10px;
 }*/
+
 .row select,
 .row input {
     background: transparent;
     color: #c1c1c1;
     border: none;
     width: 90%;
+    margin:0 5px;
     font-family: 'OpenSans-Regular', Sans-Serif;
 }
 .row input {
@@ -233,6 +239,10 @@ hr {
     grid-template-columns: 20px auto 20px;
     line-height: 20px;
 }
+/*
+.sidebar-header-grid div {
+    padding: 5px;
+}*/
 #role,
 #name {
     color: #c1c1c1;
@@ -240,8 +250,7 @@ hr {
     text-transform: capitalize;
     background: transparent;
     border: none;
-    padding: 0;
-    width:100%;
+    width: 100%;
     font-family: 'OpenSans-Regular', Sans-Serif;
 }
 #name {
