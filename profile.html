@@ -18,23 +18,16 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(function() {
-            //$('.col:first-child figure').load(`html/partials/in.html`);
             $('.flip-card-front').load(`html/partials/out.html`);
             $('.flip-card-back').load(`html/partials/in.html`);
         });
         $(document).on('click', '.fa-edit', function() {
-            //$('.col:first-child figure').css("display", "none");
-            $('.col:first-child figure').removeClass('imageRotateHorizontal');
-            //$('.col:first-child figure').addClass('imageRotateHorizontal');
-
             const page = this.dataset.page;
             if (page === 'in') {
                 $('.flip-card-inner').addClass("rotate");
-                //$('.col:first-child figure').load(`html/partials/in.html`);
                 $(this).attr("data-page", "out");
             } else if (page === 'out') {
                 $('.flip-card-inner').removeClass("rotate");
-                //$('.col:first-child figure').load(`html/partials/out.html`)
                 $(this).attr("data-page", "in");
             }
         });
