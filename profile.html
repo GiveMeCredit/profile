@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<title>DVO Template</title>
+<title>Solid POD UI</title>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/framework.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/trumbowyg.min.css">
     <script src="js/vendor/solid-auth-client.bundle.js"></script>
@@ -16,280 +16,142 @@
     <script src="https://solid.github.io/query-ldflex/dist/solid-query-ldflex.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/trumbowyg.min.js" charset="utf-8"></script>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            //$('.col:first-child figure').load(`html/partials/in.html`);
+            $('.flip-card-front').load(`html/partials/out.html`);
+            $('.flip-card-back').load(`html/partials/in.html`);
+        });
+        $(document).on('click', '.fa-edit', function() {
+            //$('.col:first-child figure').css("display", "none");
+            $('.col:first-child figure').removeClass('imageRotateHorizontal');
+            //$('.col:first-child figure').addClass('imageRotateHorizontal');
+
+            const page = this.dataset.page;
+            if (page === 'in') {
+                $('.flip-card-inner').addClass("rotate");
+                //$('.col:first-child figure').load(`html/partials/in.html`);
+                $(this).attr("data-page", "out");
+            } else if (page === 'out') {
+                $('.flip-card-inner').removeClass("rotate");
+                //$('.col:first-child figure').load(`html/partials/out.html`)
+                $(this).attr("data-page", "in");
+            }
+        });
+
+    </script>
+    <style>
+        .flip-card {
+            background-color: transparent;
+            min-width: 300px;
+            /*height: 500px;*/
+            perspective: 1000px;
+        }
+        
+        .rotate {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-inner {
+            /*position: relative;
+            width: 100%;
+            height: 100%;*/
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+        }
+        /*.flip-card-inner section {
+            background-color: #191d33;
+        }*/
+        
+        table {
+            text-align: left;
+        }
+        
+        table td {
+            padding-right: 10px;
+        }
+        
+        table td:first-child {
+            color: #dd4b39;
+        }
+        
+        .flip-card-front,
+        .flip-card-back {
+            /*position: absolute;
+            width: 100%;
+            height: 100%;*/
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        .flip-card-front {
+            background: transparent;
+            position: absolute;
+            width: 100%;
+            height: 900px;
+        }
+        
+        .flip-card-back {
+            background: transparent;
+            transform: rotateY(180deg);
+        }
+
+    </style>
 </head>
 
-<div id="profile" class="container">
-    <div class="body">
-        <div class="sidebar">
-            <div class="sidebar-top">
-                <a class="home" href="index.html"><i class="fa fa-home"></i> Home</a><a id="login" class="active" href="index.html"><i class="fa fa-sign-in"></i> <span class="status">Login</span></a></div>
-            <div class="sidebar-header sidebar-header-grid">
-                <div></div>
-                <div>
-                    <input id="name" placeholder="Guest User">
+<body>
+    <div id="container">
+        <div class="col">
+            <header>
+                <div><a class="home" href="index.html"><i class="fa fa-home"></i></a></div>
+                <div><a id="login" class="active" href="index.html"><span>LOGOUT</span><i class="fa fa-sign-in"></i></a></div>
+                <div><i data-page="in" class="fa fa-edit"></i></div>
+            </header>
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                    </div>
+                    <div class="flip-card-back">
+                    </div>
                 </div>
-                <div><button class="btn-small btn-yellow save"><i data-type="name" class="fa fa-save fa-fw"></i></button></div>
             </div>
-            <div><img class="profile-photo" src="images/profilepic.jpg" /></div>
-            <div class="sidebar-sub-header  sidebar-header-grid">
-                <div></div>
-                <div>
-                    <input id="role">
-                </div>
-                <div><button class="btn-small btn-yellow save"><i data-type="role" class="fa fa-save fa-fw"></i></button></div>
-            </div>
-            <div>
-                <button id="addFriend" class="add-friend btn btn-green">ADD FRIEND</button>
-            </div>
-            <div>
-                <div class="row three-col">
-                    <div>Web ID:</div>
-                    <div >
-                        <input id="webId" />
-                    </div>
-                    <div>
-                        <button id="copy" class="btn-small btn-yellow"><i class="fa fa-copy fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="row three-col">
-                    <div>Profile Type:</div>
-                    <div>
-                        <select id="profile-type">
-                            <option value="Personal">Personal</option>
-                            <option value="Business">Business</option>
-                            <option value="Public service">Public service</option>
-                            <option value="Charity">Charity</option>
-                            <option value="All">All of the above</option>
-                        </select>
-                    </div>
-                    <div><button class="btn-small btn-yellow save"><i data-type="profile-type" class="fa fa-save fa-fw"></i></button></div>
-                </div>
-                <div class="row three-col">
-                    <div>Email:</div>
-                    <div>
-                        <input id="email" placeholder="No email" />
-                    </div>
-                    <div><button class="btn-small btn-yellow save"><i data-type="email" class="fa fa-save fa-fw"></i></button></div>
-                </div>
-                <div class="row three-col">
-                    <div>Tel:</div>
-                    <div>
-                        <input id="phone" placeholder="No phone" />
-                    </div>
-                    <div><button class="btn-small btn-yellow save"><i data-type="phone" class="fa fa-save fa-fw"></i></button></div>
-                </div>
-                <div class="row three-col">
-                    <div>Region:</div>
-                    <div>
-                        <input id="region" placeholder="No region" />
-                    </div>
-                    <div><button class="btn-small btn-yellow save"><i data-type="region" class="fa fa-save fa-fw"></i></button></div>
-                </div>
-                <div class="row three-col">
-                    <div>Country:</div>
-                    <div>
-                        <input id="country" placeholder="No country" />
-                    </div>
-                    <div><button class="btn-small btn-yellow save"><i data-type="country" class="fa fa-save fa-fw"></i></button></div>
-                </div>
-                <!-- <div class="row six-col">
-                    <div>Addr:</div>
-                    <div>
-                        <input id="region" placeholder="No region">
-                    </div>
-                    <div><i class="fa fa-save fa-fw"></i></div>
-                    <div>, </div>
-                    <div>
-                        <input id="country" placeholder="No country">
-                    </div>
-                    <div><i class="fa fa-save fa-fw"></i></div>
-                </div>-->
-            </div>
-            <div class="sidebar-sub-header expand">Additional Info <i class="fa fa-bars"></i></div>
-            <div id="additional-info" style="display: none;">
-                <p style="text-align: center">The options will change depending on the profile type.</p>
-                <div id="personal" style="display: none">
-                    <div class="row three-col">
-                        <div>Age:</div>
-                        <div>
-                            <input id="age" placeholder="YYYY-MM-DD" />
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="age" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-                    <div class="row three-col">
-                        <div>Gender:</div>
-                        <div>
-                            <select id="gender">
-                                <option value="Not specified">Not specified</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="gender" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Emp. Status:</div>
-                        <div>
-                            <select id="employment-status">
-                                <option value="Not specified">Not specified</option>
-                                <option value="Employed">Employed</option>
-                                <option value="Unemployed">Unemployed</option>
-                                <option value="Self-employed">Self-employed</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="employment-status" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Marital Status:</div>
-                        <div>
-                            <select id="marital-status">
-                                <option value="Not specified">Not specified</option>
-                                <option value="Single">Single</option>
-                                <option value="In a relationship">In a relationship</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Widowed">Widowed</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="marital-status" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Sex. Orientation:</div>
-                        <div>
-                            <select id="sexual-orientation">
-                                <option value="Not specified">Not specified</option>
-                                <option value="Hetrosexual">Hetrosexual</option>
-                                <option value="Homosexual">Homosexual</option>
-                                <option value="Bisexual">Bisexual</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="sexual-orientation" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Ethnicity:</div>
-                        <div>
-                            <select id="ethnicity">
-                                <option value="Not specified">Not specified</option>
-                                <option value="Black">Black</option>
-                                <option value="White">White</option>
-                                <option value="Asian">Asian</option>
-                                <option value="Hispanic">Hispanic</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="ethnicity" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Religion:</div>
-                        <div>
-                            <select id="religion">
-                                <option value="Not specified">Not specified</option>
-                                <option value="Non-religious">Non-religious</option>
-                                <option value="Christianity">Christianity</option>
-                                <option value="Islam">Islam</option>
-                                <option value="Hinduism">Hinduism</option>
-                                <option value="Sikhism">Sikhism</option>
-                                <option value="Judaism">Judaism</option>
-                                <option value="Buddhism">Buddhism</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="religion" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Height:</div>
-                        <div>
-                            <select id="height">
-                                <option value="Not specified">Not specified</option>
-                                <option value="120cm">120 cm</option>
-                                <option value="121cm">121 cm</option>
-                                <option value="122cm">122 cm</option>
-                                <option value="183cm">183 cm</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="height" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-
-                    <div class="row three-col">
-                        <div>Weight:</div>
-                        <div>
-                            <select id="weight">
-                                <option value="Not specified">Not specified</option>
-                                <option value="40kg">40 kg</option>
-                                <option value="41kg">41 kg</option>
-                                <option value="42kg">42 kg</option>
-                                <option value="76kg">76 kg</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="weight" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-                </div>
-                <div id="business" style="display: none">
-                    <p style="text-align: center">UNDER CONSTRUCTION</p>
-                    <div class="row three-col">
-                        <div>Business Name:</div>
-                        <div>
-                            <input id="business-name" placeholder="Not Specified" />
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="business-name" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-                    <div class="row three-col">
-                        <div>Position:</div>
-                        <div>
-                            <input id="position" placeholder="Not Specified" />
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="position" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-                    <div class="row three-col">
-                        <div>Employees:</div>
-                        <div>
-                            <select id="num-employees">
-                                <option value="Not specified">Not specified</option>
-                                <option value="0+">0+</option>
-                                <option value="50+">50+</option>
-                                <option value="100+">100+</option>
-                                <option value="200+">200+</option>
-                                <option value="1000+">1000+</option>
-                            </select>
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="num-employees" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-                    <div class="row three-col">
-                        <div>Annual Turnover:</div>
-                        <div>
-                            <input id="annual-turnover" placeholder="Not Specified" />
-                        </div>
-                        <div><button class="btn-small btn-yellow save"><i data-type="annual-turnover" class="fa fa-save fa-fw"></i></button></div>
-                    </div>
-                </div>
-                <!--<button class="btn btn-yellow add-new-item">ADD NEW ITEM <i class="fa fa-plus"></i></button>-->
-            </div>
+            <!--<figure></figure>-->
         </div>
-        <div class="content">
-            <div class="header">For more features and to read reviews about this page please <a target="_blank" href="https://github.com/dvo1/toolbar">install the DVO extension</a></div>
-            <div class="gradient">
-                <div class="edit-icons" style="display:none;"><i class="close-note fa fa-close"></i><i class="edit-note fa fa-edit"></i></div>
-                <h1>About <span class="name"></span></h1>
-                <section class="note"></section>
-                <div class="edit-icons" style="display:none;"><i class="close-content fa fa-close"></i><i class="edit-content fa fa-edit"></i></div>
-                <section class="editable">
-                    <!--<h2>This is your extended note</h2>
-                    <p>Please read before logging in...</p>
-                    <ul>
-                        <li>When you login, a folder called DVO will be added to your public directory</li>
-                        <li>The location of this file will be public/DVO/notes-extended.html</li>
-                        <li>You can edit your profile via the front-end.</li>
-                        <li>The DVO chrome extension is not yet ready, but it's not far off.</li>
-                    </ul>-->
+        <div class="col">
+            <header>
+                <div></div>
+                <div><span>RESUME</span><i class="fa fa-info-circle"></i></div>
+                <div></div>
+            </header>
+            <section class="inner-shadow">
+                <p class="red" style="text-align: center">I'm currently in the process of rebuilding this application. Please bare with me.
+                    <br />NOTE: You can click on the edit icon (top left) and edit your VCARD.</p>
+            </section>
+
+            <details open>
+                <summary>
+                    <div>About <span class="name"></span></div>
+                    <div></div>
+                    <div><i class="fa fa-plus"></i></div>
+                </summary>
+                <section>
+                    <div class="edit-icons" style="display:none;">
+                        <i class="edit-content fa fa-edit"></i>
+                        <i class="close-content fa fa-close"></i>
+                    </div>
+                    <div class="editable"></div>
                 </section>
-                <h1>Posts</h1>
+            </details>
+
+            <details closed>
+                <summary>
+                    <div>What's on your mind, <span class="name"></span>?</div>
+                    <div></div>
+                    <div><i class="fa fa-plus"></i></div>
+                </summary>
                 <section id="add-new-post" style="display:none;">
                     <div class="form-group">
                         <textarea id="addPost" class="form-control" placeholder=""></textarea>
@@ -298,27 +160,45 @@
                         <button id="addPostBtn" class="btn btn-blue">UPDATE</button>
                     </div>
                 </section>
+            </details>
+
+            <details closed>
+                <summary>
+                    <div><span class="name"></span>'s Posts</div>
+                    <div></div>
+                    <div><i class="fa fa-plus"></i></div>
+                </summary>
                 <section>
                     <div id="posts">
                     </div>
                 </section>
-            </div>
-        </div>
-        <div class="friends">
-            <div class="right-header">Friends</div>
-            <div class="photos">
-                <!--<img class="friend-photo-small active-friend-photo" href="https://devolution.inrupt.net/profile/card#me" src="https://devolution.inrupt.net/profile/profilepic.jpg" />-->
-            </div>
+            </details>
         </div>
         <div class="col">
-            <div class="right-header">Photos</div>
-            <div class="photos">
-                <!--<img class="photo" src="images/user7-128x128.jpg" />-->
-                <img class="photo" src="images/0-200x200.jpg" />
-                <img class="photo" src="images/350-200x200.jpg" />
-                <img class="photo" src="images/829-200x200.jpg" />
-            </div>
+            <header>
+                <div></div>
+                <div><span>FRIENDS</span><i class="fa fa-share-alt"></i></div>
+                <div></div>
+            </header>
+            <section>
+                <div class="friends-photos">
+                </div>
+            </section>
+        </div>
+        <div class="col">
+            <header>
+                <div></div>
+                <div><span>PHOTOS</span><i class="fa fa-photo"></i></div>
+                <div></div>
+            </header>
+            <section>
+                <div class="photos">
+                    <!--<img class="photo" src="images/user7-128x128.jpg" />-->
+                    <img class="photo" src="images/0-200x200.jpg">
+                    <img class="photo" src="images/350-200x200.jpg">
+                    <img class="photo" src="images/829-200x200.jpg">
+                </div>
+            </section>
         </div>
     </div>
-    <!-- <div class="footer">If you found this service useful, please consider making a <a href="">donation</a></div>-->
-</div>
+</body>

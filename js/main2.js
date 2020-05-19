@@ -116,7 +116,6 @@ $(document).ready(async function () {
         let age = await getAge(dob);
         let gender = await user.gender;
         let profileType = await user.vcard$profileType;
-        let org = await user["http://www.w3.org/2006/vcard/ns#organization-name"];
         let employmentStatus = await user.vcard$employmentStatus;
         let maritalStatus = await user.vcard$maritalStatus;
         let sexualOrientation = await user.vcard$sexualOrientation;
@@ -128,37 +127,23 @@ $(document).ready(async function () {
         // DISPLAY VCARD DATA
 
         document.title = fullName;
-        $('#name').html(`${fullName}`);
-        $('#vcard-name').val(`${fullName}`);
+        $('#name').val(`${fullName}`);
         $(".name").html(`${firstName}`);
-        if (role) {
-            $('#role').html(`${role}`)
-            $('#vcard-role').val(`${role}`);
-        };
+        if (role) $('#role').val(`${role}`);
         $('#webId').val(webIdFromUrl);
         $(".profile-photo").attr("src", photo);
-        if (note) {
-            $(".note").html(`${note}`);
-            $("#vcard-note").val(`${note}`);
-        }
+        if (note) $(".note").html(`${note}`);
         if (age) {
-            $('#age').html(`${age}`);
+            $('#age').val(`${age}`);
             //$('#age').removeClass('editable-item');
         }
-        $('#organization').html(`${org}`);
-        $('#vcard-organization').val(`${org}`);
-        $('#email').html(email);
-        $('#vcard-email').val(email);
-        $('#phone').html(phone);
-        $('#vcard-phone').val(phone);
-        $('#region').html(address[0]);
-        $('#vcard-region').val(`${address[0]}`);
-        $('#country').html(address[1]);
-        $('#vcard-country').val(`${address[1]}`);
+        $('#email').val(email);
+        $('#phone').val(phone);
+        $('#region').val(address[0]);
+        $('#country').val(address[1]);
 
         // Additional info
         if (profileType) {
-            $(`#profile-type`).html(`${profileType}`);
             $(`#profile-type option[value="${profileType}"]`).prop("selected", true);
             let profType = `'${profileType}'`;
             profType = profileType.toString();
@@ -194,7 +179,7 @@ $(document).ready(async function () {
                     let friendPhoto = await solid.data[fr].vcard$hasPhoto;
                     if (!friendPhoto) friendPhoto = 'images/profilepic.jpg';
                     let friendName = await solid.data[friend].vcard$fn;
-                    $('.friends-photos').prepend(`<a alt="${friendName}" href='${friendUrl}'><img src="${friendPhoto}" /></a>`);
+                    $('.friends .photos').prepend(`<a alt="${friendName}" href='${friendUrl}'><img class="friend-photo-small active-friend-photo" src="${friendPhoto}" /></a>`);
                 } catch (e) {
                     console.log(e);
                 }
@@ -277,7 +262,7 @@ $(document).ready(async function () {
             $(".close-note").click(function () {
                 $('.note').trumbowyg('destroy');
             });
-            $('.col').on('click', '.fa-save', function () {
+            $('.sidebar').on('click', '.fa-save', function () {
                 let $this = $(this);
                 editItem($this);
             });
@@ -318,7 +303,7 @@ $(document).ready(async function () {
                         let label = array[i]['label'];
                         let id = label.split('.');
                         $.get(array[i]['url'], '', function (data) {
-                            $("#posts").prepend(`<div class="edit-icons" style="${display}"><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i><i data-button-type='${id[0]}' class="delete-post fa fa-close"></i></div><div class='post ${id[0]}'>${data}</div>`);
+                            $("#posts").prepend(`<div class="edit-icons" style="${display}"><i data-button-type='${id[0]}' class="delete-post fa fa-close"></i><i data-button-type='${id[0]}' class="edit-post fa fa-edit"></i></div><div class='post ${id[0]}'>${data}</div>`);
                         });
                     }
                 }
@@ -424,57 +409,54 @@ $(document).ready(async function () {
             let field = $this.attr("data-type");
             let update = $('#' + field).val();
             let user = solid.data[session.webId];
-            if (field === 'vcard-name') {
+            if (field === 'name') {
                 await user.vcard$fn.set(update);
             }
-            if (field === 'vcard-role') {
+            if (field === 'role') {
                 await user.vcard$role.set(update);
             }
-            if (field === 'vcard-email') {
+            if (field === 'email') {
                 update = "mailto:" + update;
                 await updateVcardEmail(session.webId, update);
             }
-            if (field === 'vcard-phone') {
+            if (field === 'phone') {
                 update = "tel:" + update;
                 await updateVcardPhone(session.webId, update);
             }
-            if (field === 'vcard-organization') {
-                await user["http://www.w3.org/2006/vcard/ns#organization-name"].set(update);
-            }
-            if (field === 'vcard-region') {
+            if (field === 'region') {
                 await updateVcardRegion(session.webId, update);
             }
-            if (field === 'vcard-country') {
+            if (field === 'country') {
                 await updateVcardCountry(session.webId, update);
             }
-            if (field === 'vcard-age') {
+            if (field === 'age') {
                 await user.vcard$bday.set(update);
             }
-            if (field === 'vcard-gender') {
+            if (field === 'gender') {
                 await user.foaf$gender.set(update);
             }
-            if (field === 'vcard-profile-type') {
+            if (field === 'profile-type') {
                 await user.vcard$profileType.set(update);
             }
-            if (field === 'vcard-employment-status') {
+            if (field === 'employment-status') {
                 await user.vcard$employmentStatus.set(update);
             }
-            if (field === 'vcard-marital-status') {
+            if (field === 'marital-status') {
                 await user.vcard$maritalStatus.set(update);
             }
-            if (field === 'vcard-sexual-orientation') {
+            if (field === 'sexual-orientation') {
                 await user.vcard$sexualOrientation.set(update);
             }
-            if (field === 'vcard-ethnicity') {
+            if (field === 'ethnicity') {
                 await user.vcard$ethnicity.set(update);
             }
-            if (field === 'vcard-religion') {
+            if (field === 'religion') {
                 await user.vcard$religion.set(update);
             }
-            if (field === 'vcard-height') {
+            if (field === 'height') {
                 await user.vcard$height.set(update);
             }
-            if (field === 'vcard-weight') {
+            if (field === 'weight') {
                 await user.vcard$weight.set(update);
             }
 
