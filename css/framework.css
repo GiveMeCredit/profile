@@ -699,7 +699,7 @@ small::before {
     /*filter: grayscale(100%);*/
 }
 .photos img {
-    margin-bottom: 20px;
+    margin: 10px auto 20px auto;
     width: 100px;
     height: 100px;
     display: block;
