@@ -131,6 +131,8 @@ $(document).ready(async function () {
         if (note) {
             $(".note").html(`${note}`);
             $("#vcard-note").val(`${note}`);
+        } else {
+            $(".note").html(`${firstName} has not added any notes yet.`);
         }
         if (age) {
             $('#age').html(`${age}`);
