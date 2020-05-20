@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!--<link rel="stylesheet" href="/css/reset.css">-->
-    <link rel="stylesheet" href="css/style.css">
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <link rel="stylesheet" href="css/framework.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/trumbowyg.min.css">
     <script src="js/vendor/solid-auth-client.bundle.js"></script>
     <script src="js/vendor/solid-file-client.bundle.js"></script>
     <script src="js/vendor/rdflib.min.js"></script>
@@ -18,6 +18,17 @@
         .page {
             display: none;
         }
+        
+        #login-container {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+        }
+        
+        .dvo-logo {
+            display: block;
+            margin: auto;
+        }
 
     </style>
 </head>
@@ -25,15 +36,23 @@
 <div class="header">
     <a target="_blank" href="https://solid.inrupt.com/get-a-solid-pod">LOGIN</a> | <a target="_blank" href="https://solid.inrupt.com/get-a-solid-pod">GET YOUR FREE POD &amp; WEBID</a> | <a target="_blank" href="http://localhost:8000/?webId=https://devolution.inrupt.net/profile/card#me">VIEW YOUR PAGE</a>
 </div>-->
-<div id="home" class="container">
-    <div class="body">
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <a href="index.html"><img class="logo" src="images/logo.png" /></a>
-            </div>
-            <div class="sidebar-sub-header login-status">Login</div>
-            <div>
-                <div class="home-page-login">
+
+<body>
+    <div id="container">
+        <div class="col center">
+            <header>
+                <div></div>
+                <div class="login-status"><span>LOGIN</span><i class="fa fa-sign-in"></i></div>
+                <div></div>
+            </header>
+            <section class="inner-shadow welcome">
+                If you don't already have an account, please choose a host from the options below
+            </section>
+            <section id="view-profile">
+                <button class="btn btn-green btn-align-center"><i class="fa fa-user"></i><span>VIEW PROFILE</span></button>
+            </section>
+            <section id="login-form">
+                <div class="form-grid">
                     <div>
                         <select id="provider" class="form-control">
                             <option value="https://inrupt.net">Inrupt</option>
@@ -41,58 +60,60 @@
                         </select>
                     </div>
                     <div>
-                        <button id="submit" class="btn btn-green"><i class="fa fa-sign-in"></i></button>
+                        <button id="submit" class="btn btn-dark"><i class="fa fa-sign-in"></i></button>
                     </div>
                 </div>
-                <div id="gun-password" style="display: none; color:#fff; text-align: center;">
-                    <!--<p>Please re-enter your password to login to the toolbar</p>-->
+            </section>
+            <details open="" class="left">
+                <summary>
+                    <div></div>
+                    <div>Main Menu</div>
+                    <div><i class="fa fa-bars"></i></div>
+                </summary>
+                <section class="animate__animated animate__fadeIn">
+                    <nav>
+                        <div><a class="active page-link" data-page="home" href=""><i class="fa fa-home fa-fw"></i>Home</a></div>
+                        <div><a class="page-link" data-page="projects" href=""><i class="fa fa-lightbulb-o fa-fw"></i>Projects</a></div>
+                        <div><a class="page-link" data-page="videos" href=""><i class="fa fa-file-video-o  fa-fw"></i>Videos</a></div>
+                        <div><a class="page-link" data-page="support" href=""><i class="fa fa-comment fa-fw"></i>Support</a></div>
+                    </nav>
+                </section>
+            </details>
+        </div>
+        <div class="col center">
+            <section class="inner-shadow"><img class="dvo-logo" src="images/logo.png" /></section>
+            <main></main>
+        </div>
+        <div class="col center">
+            <header>
+                <div></div>
+                <div><span>ABOUT</span><i class="fa fa-info-circle"></i></div>
+                <div></div>
+            </header>
+            <section><img class="profile-photo" src="https://devolution.inrupt.net/profile/profilepic.jpg"></section>
+            <section class="inner-shadow" style="max-width: 300px;">
+                <h3>Hi. My name is Glen!</h3>
+                <p>I don't charge money for my services. However, If you find any of the services which I offer either userful or interesting, I would greatly appreciate a donation, to help me continue development.</p>
+            </section>
+
+
+            <section>
+                <p>NOTE: This section is under construction</p>
+                <button class="btn btn-red btn-align-center">DONATE</button>
+            </section>
+            <section>
+                <p>Donations received this month</p>
+                <div class="form-grid">
                     <div>
-                        <input type="password" id="input" class="form-control" placeholder="Re-enter your password">
+                        <input class="form-control" placeholder="0">
                     </div>
-                    <div><button id="send" class="btn btn-blue"><i class="fa fa-sign-in"></i></button></div>
-                </div>
-            </div>
-            <div class="sidebar-sub-header"><button id="viewProfile" style="display: none; margin: auto;" class="btn btn-red"><i class="fa fa-user"></i><span style="margin-left:10px;">VIEW PROFILE</span></button></div>
-            <div class="sidebar-sub-header">Documentation</div>
-            <div class="sidebar-menu">
-                <ul id="details">
-                    <li><a class="active page-link" data-page="gettingStarted" href="">Getting Started</a></li>
-                    <li><a class="page-link" data-page="about" href="">About</a></li>
-                    <li><a class="page-link" data-page="videos" href="">Videos</a></li>
-                    <li><a class="page-link" data-page="developers" href="">Developers</a></li>
-                    <!--<li><a class="page-link" data-page="tutorials" href="">Tutorials</a></li>
-                    <li><a class="page-link" data-page="faq" href="">FAQ</a></li>
-                    <li><a class="page-link" data-page="other" href="">Other projects</a></li>-->
-                </ul>
-            </div>
-        </div>
-        <div class="home-page-content">
-        </div>
-        <div class="sidebar">
-            <div class="sidebar-header"><img class="profile-photo" src="https://devolution.inrupt.net/profile/profilepic.jpg"></div>
-            <div class="sidebar-sub-header">Hi. My name is Glen!</div>
-            <div>
-                <div class="about-me">
-                    <p>I don't charge money for my services. However, If you find any of the services which I offer either userful or interesting, I would greatly appreciate a donation, to help me continue development.</p>
-                </div>
-            </div>
-            <div>
-                <button style="display: block; margin: auto;" class="btn btn-red">DONATE</button>
-            </div>
-            <div class="sidebar-sub-header">Donations received this month</div>
-            <div>
-                <div class="donations-received">
                     <div>
                         <button class="currency btn btn-yellow">$</button>
                     </div>
-                    <div>
-                        <input class="amount form-control" placeholder="0">
-                    </div>
                 </div>
-            </div>
-            <div class="sidebar-sub-header">NOTE: This will not be updated in real-time</div>
+            </section>
+            <section>NOTE: This will not be updated in real-time</section>
         </div>
     </div>
-    <!-- <div class="footer">If you found this service useful, please consider making a <a href="">donation</a></div> -->
-</div>
+</body>
 <script src="js/index.js"></script>

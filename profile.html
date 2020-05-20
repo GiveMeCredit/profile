@@ -14,10 +14,14 @@
     <script src="js/vendor/rdflib.min.js"></script>
     <script src="js/vendor/jquery.js"></script>
     <script src="https://solid.github.io/query-ldflex/dist/solid-query-ldflex.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/scenaristeur/shighl@master/dist/window/shighl.bundle.js">
+
+
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/trumbowyg.min.js" charset="utf-8"></script>
     <script src="js/main.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(async function() {
             $('.flip-card-front').load(`html/partials/out.html`);
             $('.flip-card-back').load(`html/partials/in.html`);
         });
@@ -33,65 +37,6 @@
         });
 
     </script>
-    <style>
-        .flip-card {
-            background-color: transparent;
-            min-width: 300px;
-            /*height: 500px;*/
-            perspective: 1000px;
-        }
-        
-        .rotate {
-            transform: rotateY(180deg);
-        }
-        
-        .flip-card-inner {
-            /*position: relative;
-            width: 100%;
-            height: 100%;*/
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-        }
-        /*.flip-card-inner section {
-            background-color: #191d33;
-        }*/
-        
-        table {
-            text-align: left;
-        }
-        
-        table td {
-            padding-right: 10px;
-        }
-        
-        table td:first-child {
-            color: #dd4b39;
-        }
-        
-        .flip-card-front,
-        .flip-card-back {
-            /*position: absolute;
-            width: 100%;
-            height: 100%;*/
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-        
-        .flip-card-front {
-            background: transparent;
-            position: absolute;
-            width: 100%;
-            height: 900px;
-        }
-        
-        .flip-card-back {
-            background: transparent;
-            transform: rotateY(180deg);
-        }
-
-    </style>
 </head>
 
 <body>
@@ -99,7 +44,7 @@
         <div class="col">
             <header>
                 <div><a class="home" href="index.html"><i class="fa fa-home"></i></a></div>
-                <div><a id="login" class="active" href="index.html"><span>LOGOUT</span><i class="fa fa-sign-in"></i></a></div>
+                <div><a id="login" class="active" href="index.html"><span>LOGIN</span><i class="fa fa-sign-in"></i></a></div>
                 <div><i data-page="in" class="fa fa-edit"></i></div>
             </header>
 

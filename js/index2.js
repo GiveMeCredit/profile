@@ -1,33 +1,18 @@
+$(document).on('click', '.page-link', function (event) {
+    event.preventDefault();
+    const name = this.dataset.page;
+    $('.active').removeClass('active');
+    // need to make menu item active when click on inline links
+    this.classList.add('active');
+    $('.page').hide();
+    $('.' + name + '-page').show();
+    //$('.home-page-content').load(`html/${name}.html`);
+    $('main').load(`html/${name}.html`);
+});
+
 $(document).ready(async function () {
-    if ($(window).width() < 900) $('details').removeAttr("open");
-
-    $('main').load(`html/home.html`);
-    
-    let urlParams = new URLSearchParams(window.location.search);
-    let page = urlParams.get('page');
-    if (!page) {
-        page = 'home';
-    }
-    // Navigation
-    $('main').load(`html/${page}.html`, function () {
-        $('main').css("opacity", "0.2");
-        $('main').fadeTo(1000, 1);
-    });
-    $(document).on('click', '.page-link', function (event) {
-        event.preventDefault();
-        let text = $(this).text();
-        $('.heading small').text(text);
-        const name = this.dataset.page;
-        window.history.pushState(`?page=${name}`, "Title", `?page=${name}`);
-        $('nav .active').removeClass('active');
-        this.classList.add('active');
-        $('main').load(`html/${name}.html`, function () {
-            $('main').css("opacity", "0.2");
-            $('main').fadeTo(1000, 1);
-        });
-    });
-
-
+    //$('.home-page-content').load(`html/gettingStarted.html`);
+    $('main').load(`html/gettingStarted.html`);
 
     function getRandomProvider() {
         let provider = [
@@ -37,6 +22,38 @@ $(document).ready(async function () {
         var rand = Math.floor(Math.random() * provider.length);
         return provider[rand];
     }
+
+    //$(`#provider option[value="${getRandomProvider()}"]`).attr("selected", true);
+
+    /*function getHashParams() {
+        var hashParams = {};
+        var e,
+            a = /\+/g, // Regex for replacing addition symbol with a space
+            r = /([^&;=]+)=?([^&;]*)/g,
+            d = function (s) {
+                return decodeURIComponent(s.replace(a, " "));
+            },
+            q = window.location.hash.substring(1);
+        while (e = r.exec(q))
+            hashParams[d(e[1])] = d(e[2]);
+        return hashParams;
+    }
+    
+    let hashParams = getHashParams();
+    console.log(hashParams);
+    if (Object.entries(hashParams).length > 0) {
+        $('#viewProfile span').text('VIEW PROFILE');
+        $('#viewProfile').removeClass('btn-blue');
+        $('#viewProfile').addClass('btn-red');
+        try {
+            port = chrome.runtime.connect(laserExtensionId);
+            $('.home-page-login').hide();
+            $('#gun-password').show();
+        } catch (e) {
+            console.log(e);
+        }
+
+    }*/
 
     let dvoInstalled = false;
     let laserExtensionId = "bnmeokbnbegjnbddihbidleappfkiimj";
@@ -64,10 +81,8 @@ $(document).ready(async function () {
     if (session) {
         let fullName = await solid.data[session.webId].vcard$fn;
         let firstName = fullName.toString().split(' ');
-        $('.login-status').html(`<span id="logout">LOGOUT</span><i class="fa fa-sign-out"></i>`);
-        $('.welcome').html(`Welcome ${firstName[0]}!`);
-        $('#view-profile').css("display", "block");
-        $('#login-form').addClass("inner-shadow");
+        $('.login-status').html(`Welcome ${firstName[0]}! <a id="logout" href="">Logout</a>`);
+        $('#viewProfile').css("display", "block");
         $('.home-page-login').hide();
         if (dvoInstalled) {
             $('#gun-password').show();
@@ -75,8 +90,6 @@ $(document).ready(async function () {
             console.log(`The user doesn't have the DVO extension installed`);
         }
     }
-    
-    
 
     async function sendSessionToDVO() {
         const session = await solid.auth.currentSession();
@@ -109,12 +122,13 @@ $(document).ready(async function () {
 
     $('#submit').on('click touchstart', function () {
         let provider = $("#provider").val();
+        alert(provider);
         login(provider);
     });
     $('#send').click(async function () {
         sendSessionToDVO();
     });
-    $('#view-profile button').on('click touchstart', async function () {
+    $('#viewProfile').on('click touchstart', async function () {
         const session = await solid.auth.currentSession();
         let url = `profile.html?webId=${session.webId}`;
         window.open(url, '_blank');

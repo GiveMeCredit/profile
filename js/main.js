@@ -89,15 +89,6 @@ $(document).ready(async function () {
 
         $('#addFriend').attr("href", webIdFromUrl);
 
-        // Expand additional information section on sidebar
-        $('.expand').click(function () {
-            $('#additional-info').toggle();
-            $(".sidebar").animate({
-                scrollTop: $(document).height()
-            }, "slow");
-            return false;
-        });
-
         // LOAD VCARD DATA
         let user = await solid.data[webIdFromUrl];
         let photo = await user.vcard$hasPhoto;
