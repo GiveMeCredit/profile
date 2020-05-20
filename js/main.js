@@ -125,7 +125,9 @@ $(document).ready(async function () {
         if (role) {
             $('#role').html(`${role}`)
             $('#vcard-role').val(`${role}`);
-        };
+        } else {
+            $('#role').html(`${firstName} has not specified a role`);
+        }
         $('#webId').val(webIdFromUrl);
         $(".profile-photo").attr("src", photo);
         if (note) {
