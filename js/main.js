@@ -277,7 +277,7 @@ $(document).ready(async function () {
             $(".close-note").click(function () {
                 $('.note').trumbowyg('destroy');
             });
-            $('.col').on('click', '.fa-save', function () {
+            $('.col:first-child').on('click', '.fa-save', function () {
                 let $this = $(this);
                 editItem($this);
             });
