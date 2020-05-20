@@ -22,8 +22,8 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(async function() {
-            $('.flip-card-front').load(`html/partials/out.html`);
-            $('.flip-card-back').load(`html/partials/in.html`);
+            $('.flip-card-front').load(`html/partials/front.html`);
+            $('.flip-card-back').load(`html/partials/back.html`);
         });
         $(document).on('click', '.fa-edit', function() {
             const page = this.dataset.page;

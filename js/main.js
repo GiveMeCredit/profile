@@ -134,7 +134,7 @@ $(document).ready(async function () {
         }
         if (age) {
             $('#age').html(`${age}`);
-            //$('#age').removeClass('editable-item');
+            $('#vcard-dob').val(`${dob}`);
         }
         $('#organization').html(`${org}`);
         $('#vcard-organization').val(`${org}`);
@@ -155,14 +155,14 @@ $(document).ready(async function () {
             profType = profileType.toString();
             if (profType === 'Personal') {
                 $('#personal').css("display", "block");
-                $(`#gender option[value="${gender}"]`).prop("selected", true);
-                $(`#employment-status option[value="${employmentStatus}"]`).prop("selected", true);
-                $(`#marital-status option[value="${maritalStatus}"]`).prop("selected", true);
-                $(`#sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
-                $(`#ethnicity option[value="${ethnicity}"]`).prop("selected", true);
-                $(`#religion option[value="${religion}"]`).prop("selected", true);
-                $(`#height option[value="${height}"]`).prop("selected", true);
-                $(`#weight option[value="${weight}"]`).prop("selected", true);
+                $(`#vcard-gender option[value="${gender}"]`).prop("selected", true);
+                $(`#vcard-employment-status option[value="${employmentStatus}"]`).prop("selected", true);
+                $(`#vcard-marital-status option[value="${maritalStatus}"]`).prop("selected", true);
+                $(`#vcard-sexual-orientation option[value="${sexualOrientation}"]`).prop("selected", true);
+                $(`#vcard-ethnicity option[value="${ethnicity}"]`).prop("selected", true);
+                $(`#vcard-religion option[value="${religion}"]`).prop("selected", true);
+                $(`#vcard-height option[value="${height}"]`).prop("selected", true);
+                $(`#vcard-weight option[value="${weight}"]`).prop("selected", true);
             }
             if (profType === 'Business') {
                 $('#business').css("display", "block");
@@ -438,7 +438,7 @@ $(document).ready(async function () {
             if (field === 'vcard-country') {
                 await updateVcardCountry(session.webId, update);
             }
-            if (field === 'vcard-age') {
+            if (field === 'vcard-dob') {
                 await user.vcard$bday.set(update);
             }
             if (field === 'vcard-gender') {

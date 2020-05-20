@@ -1,0 +1,354 @@
+<section class="inner-shadow">
+    <div class="form-grid">
+        <div>
+            <input id="vcard-name" class="form-control" placeholder="Name" />
+        </div>
+        <div>
+            <button class="btn btn-dark"><i data-type="vcard-name" class="fa fa-save"></i></button>
+        </div>
+    </div>
+</section>
+<section>
+    <img class="profile-photo" src="./images/profilepic.jpg" />
+    <div class="photo-manager">
+        <div><i class="fa fa-camera"></i></div>
+        <div><i class="fa fa-upload"></i></div>
+        <div><i class="fa fa-trash"></i></div>
+    </div>
+</section>
+<section class="inner-shadow">
+    <div class="form-grid">
+        <div>
+            <input id="vcard-role" class="form-control" placeholder="Role" />
+        </div>
+        <div>
+            <button class="btn btn-dark"><i data-type="vcard-role" class="fa fa-save"></i></button>
+        </div>
+    </div>
+</section>
+
+<details>
+    <summary>
+        <div>Basic Info</div>
+        <div></div>
+        <div><i class="fa fa-plus"></i></div>
+    </summary>
+    <section>
+        <div class="form-grid">
+            <div>
+                <input type="date" id="vcard-dob" class="form-control" placeholder="Organization" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-dob" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-organization" class="form-control" placeholder="Organization" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-organization" class="fa fa-save"></i></button>
+            </div>
+        </div>
+    </section>
+</details>
+
+<details>
+    <summary>
+        <div>Address</div>
+        <div></div>
+        <div><i class="fa fa-plus"></i></div>
+    </summary>
+    <section>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-region" class="form-control" placeholder="Region" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-region" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-country" class="form-control" placeholder="Country" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-country" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn btn-yellow btn-align-center"><i class="fa fa-plus"></i><span>ADD MORE</span></button>
+    </section>
+</details>
+
+<details>
+    <summary>
+        <div>Email &amp; Phone</div>
+        <div></div>
+        <div><i class="fa fa-plus"></i></div>
+    </summary>
+    <section>
+        <select class="form-control">
+            <option>Home</option>
+            <option>Dom</option>
+            <option>ISDN</option>
+            <option>Internet</option>
+            <option>Intl</option>
+            <option>Label</option>
+            <option>Parcel</option>
+            <option>Postal</option>
+            <option>Pref</option>
+            <option>Work</option>
+            <option>X400</option>
+        </select>
+        <div class="spacer"></div>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-email" class="form-control" placeholder="Email address" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-email" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn btn-yellow btn-align-center"><i class="fa fa-plus"></i><span>ADD MORE</span></button>
+        <div class="spacer"></div>
+        <select class="form-control">
+            <option>Home</option>
+            <option>Dom</option>
+            <option>ISDN</option>
+            <option>Internet</option>
+            <option>Intl</option>
+            <option>Label</option>
+            <option>Parcel</option>
+            <option>Postal</option>
+            <option>Pref</option>
+            <option>Work</option>
+            <option>X400</option>
+        </select>
+        <div class="spacer"></div>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-phone" class="form-control" placeholder="Phone number" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-phone" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn btn-yellow btn-align-center"><i class="fa fa-plus"></i><span>ADD MORE</span></button>
+    </section>
+</details>
+
+<details>
+    <summary>
+        <div>General Notes</div>
+        <div></div>
+        <div><i class="fa fa-plus"></i></div>
+    </summary>
+    <section>
+        <textarea id="vcard-note" row="80" class="form-control">Enter some notes about yourself</textarea>
+        <div class="spacer"></div>
+        <button class="btn btn-yellow btn-align-center"><i data-type="vcard-note" class="fa fa-save"></i><span>SAVE</span></button>
+    </section>
+</details>
+
+<details>
+    <summary>
+        <div>Additional Info</div>
+        <div></div>
+        <div><i class="fa fa-plus"></i></div>
+    </summary>
+    <section>
+        <div>Gender:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-gender" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-gender" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Emp. Status:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-employment-status" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Unemployed">Unemployed</option>
+                    <option value="Self-employed">Self-employed</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-employment-status" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Marital Status:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-marital-status" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="Single">Single</option>
+                    <option value="In a relationship">In a relationship</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-marital-status" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Sexual Orientation:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-sexual-orientation" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="Hetrosexual">Hetrosexual</option>
+                    <option value="Homosexual">Homosexual</option>
+                    <option value="Bisexual">Bisexual</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-sexual-orientation" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Ethnicity:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-ethnicity" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Hispanic">Hispanic</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-ethnicity" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Religion:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-religion" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="Non-religious">Non-religious</option>
+                    <option value="Christianity">Christianity</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Hinduism">Hinduism</option>
+                    <option value="Sikhism">Sikhism</option>
+                    <option value="Judaism">Judaism</option>
+                    <option value="Buddhism">Buddhism</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-religion" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Height:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-height" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="120cm">120 cm</option>
+                    <option value="121cm">121 cm</option>
+                    <option value="122cm">122 cm</option>
+                    <option value="183cm">183 cm</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-height" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Weight:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-weight" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="40kg">40 kg</option>
+                    <option value="41kg">41 kg</option>
+                    <option value="42kg">42 kg</option>
+                    <option value="76kg">76 kg</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-weight" class="fa fa-save"></i></button>
+            </div>
+        </div>
+    </section>
+</details>
+
+<details>
+    <summary>
+        <div>Business Info</div>
+        <div></div>
+        <div><i class="fa fa-plus"></i></div>
+    </summary>
+    <section>
+        <p>This section is under construction.
+            <br />If your profile type is set to business
+            <br/>a different set of options will be displayed</p>
+        <div>Business Name:</div>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-business-name" placeholder="Not Specified" class="form-control" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-business-name" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Employees:</div>
+        <div class="form-grid">
+            <div>
+                <select id="vcard-num-employees" class="form-control">
+                    <option value="Not specified">Not specified</option>
+                    <option value="0+">0+</option>
+                    <option value="50+">50+</option>
+                    <option value="100+">100+</option>
+                    <option value="200+">200+</option>
+                    <option value="1000+">1000+</option>
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-num-employees" class="fa fa-save"></i></button>
+            </div>
+        </div>
+        <div class="spacer"></div>
+
+        <div>Annual Turnover:</div>
+        <div class="form-grid">
+            <div>
+                <input id="vcard-annual-turnover" placeholder="Not Specified" class="form-control" />
+            </div>
+            <div>
+                <button class="btn btn-dark"><i data-type="vcard-annual-turnover" class="fa fa-save"></i></button>
+            </div>
+        </div>
+    </section>
+</details>
