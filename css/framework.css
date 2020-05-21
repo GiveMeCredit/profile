@@ -208,6 +208,13 @@ Lines changed
     padding: 0;
 }*/
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'OpenSans-Bold';
+}
 
 /*** This isn't a part of the the framework and so should be moved ***/
 
