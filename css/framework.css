@@ -209,6 +209,14 @@ Lines changed
     padding: 0;
 }*/
 
+hr {
+    height: 20px;
+    width: 100%;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
 .btn {
     box-sizing: border-box;
 }
@@ -374,6 +382,8 @@ nav .fa {
 nav div:last-child {
     border: none;
 }
+
+/*** This will soon be removed as it is replaced with <hr> ***/
 .spacer {
     height: 20px;
     width: 100%;
