@@ -201,6 +201,7 @@ Lines changed
 183
 631 - removed bottom margin
 639 - replaced padding with margin-top: 20px;
+489 - box-sizing: border-box;
 */
 
 
@@ -208,6 +209,9 @@ Lines changed
     padding: 0;
 }*/
 
+.btn {
+    box-sizing: border-box;
+}
 h1,
 h2,
 h3,
