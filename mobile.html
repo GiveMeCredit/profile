@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>My Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/framework.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/vendor/jquery.js"></script>
+    <script>
+        $(document).on('click', 'button', function() {
+            const page = this.dataset.page;
+            if (page === 'in') {
+                $('.flip-card-inner').addClass("rotate");
+                $(this).attr("data-page", "out");
+            } else if (page === 'out') {
+                $('.flip-card-inner').removeClass("rotate");
+                $(this).attr("data-page", "in");
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="container2">
+        <header>
+            <div><a class="home" href="index.html"><i class="fa fa-home"></i></a></div>
+            <div><a id="login" class="active" href="index.html"><span>LOGIN</span><i class="fa fa-sign-in"></i></a></div>
+            <div></div>
+        </header>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <section class="inner-shadow">
+                        <div id="name">Glen Simister</div>
+                    </section>
+                    <section>
+                        <img class="profile-photo" src="./images/profilepic.jpg" />
+                    </section>
+                    <section class="inner-shadow">
+                        <div id="role">A Jack Of All Trades</div>
+                    </section>
+
+                    <section>
+                        <button class="btn btn-green btn-align-center">ENTER</button>
+                    </section>
+                </div>
+                <div class="flip-card-back">
+                    <p>back</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -27,12 +27,12 @@
         });
         $(document).on('click', '.fa-edit', function() {
             const page = this.dataset.page;
-            if (page === 'in') {
+            if (page === 'back') {
                 $('.flip-card-inner').addClass("rotate");
-                $(this).attr("data-page", "out");
-            } else if (page === 'out') {
+                $(this).attr("data-page", "front");
+            } else if (page === 'front') {
                 $('.flip-card-inner').removeClass("rotate");
-                $(this).attr("data-page", "in");
+                $(this).attr("data-page", "back");
             }
         });
 
@@ -45,7 +45,7 @@
             <header>
                 <div><a class="home" href="index.html"><i class="fa fa-home"></i></a></div>
                 <div><a id="login" class="active" href="index.html"><span>LOGIN</span><i class="fa fa-sign-in"></i></a></div>
-                <div><i data-page="in" class="fa fa-edit"></i></div>
+                <div><i data-page="back" class="fa fa-edit"></i></div>
             </header>
 
             <div class="flip-card">
